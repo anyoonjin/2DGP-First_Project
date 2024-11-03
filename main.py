@@ -1,9 +1,9 @@
-from pico2d import*
+from pico2d import open_canvas, delay, close_canvas
+import game_framework
 
-import background
-import player
-import game_world
+import play_mode as start_mode
 
+'''
 def reset_world():
 
    pass
@@ -17,5 +17,8 @@ def update_world():
     game_world.update()
     pass
 
+'''
+
 open_canvas(1300,1000)
-reset_world()
+game_framework.run(start_mode)
+close_canvas()

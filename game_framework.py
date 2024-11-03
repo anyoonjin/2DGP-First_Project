@@ -51,8 +51,9 @@ def run(start_mode):
         stack[-1].handle_events()
         stack[-1].update()
         stack[-1].draw()
-        frame_time = time.time() - current_time
-        frame_rate = 1.0 / frame_time
+        new_time = time.time()
+        frame_time = new_time - current_time
+        frame_rate = 1.0 /  frame_time if frame_time > 0 else 60.0
         current_time += frame_time
         # print(f'Frame Time: {frame_time}, Frame Rate: {frame_rate}')
 

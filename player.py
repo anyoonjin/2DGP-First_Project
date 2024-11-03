@@ -9,14 +9,30 @@ RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 # Boy Action Speed
-TIME_PER_ACTION = 0.5
-ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
-FRAMES_PER_ACTION = 8
+TIME_PER_ACTION = 0.8
+ACTION_PER_TIME = 2.0 / TIME_PER_ACTION
+FRAMES_PER_ACTION = 4
 
-
+# 상=0 / 우=1 / 좌=2 / 하=3
 class Idle:
     @staticmethod
     def enter(player, e):
+        if start_event(e):
+            player.action = 3
+            player.face_dir = 3
+        elif right_down(e) or left_up(e):
+            player.action = 2
+            player.face_dir = 2
+        elif left_down(e) or right_up(e):
+            player.action = 1
+            player.face_dir = 1
+        elif down_down(e) or down_up(e):  # 아래로 RUN
+            player.face_dir, player.action = 3, 3
+        elif up_down(e) or up_down(e):  # 위로 RUN
+            player.face_dir, player.action = 0, 0
+
+        player.frame = 0
+        player.wait_time = get_time()
         pass
 
     @staticmethod
@@ -25,22 +41,23 @@ class Idle:
 
     @staticmethod
     def do(player):
+        player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
         pass
 
     @staticmethod
     def draw(player):
-        player.image.clip_draw(player.frame * 100, player.action * 100, 100, 100, player.x, player.y)
+        player.image.clip_draw(int(player.frame )* 75,int(player.action)* 75, 75, 75, int(player.x),int( player.y),100,100)
 
 
 class Run:
     @staticmethod
     def enter(player, e):
         if right_down(e) or left_up(e): # 오른쪽으로 RUN
-            player.dir, player.face_dir, player.action = 1, 1, 0
+            player.dir, player.face_dir, player.action = 1, 1, 1
         elif left_down(e) or right_up(e): # 왼쪽으로 RUN
-            player.dir, player.face_dir, player.action = 2, 2, 0
+            player.dir, player.face_dir, player.action = 2, 2, 2
         elif down_down(e) or down_up(e):    #아래로 RUN
-            player.dir, player.face_dir, player.action = 3, 3, 0
+            player.dir, player.face_dir, player.action = 3, 3, 3
         elif up_down(e) or up_down(e):  #위로 RUN
             player.dir, player.face_dir, player.action = 0, 0, 0
 
@@ -49,36 +66,42 @@ class Run:
         if space_down(e):
             player.attack()
 
-
+    # 상=0 / 우=1 / 좌=2 / 하=3
     @staticmethod
     def do(player):
-        # boy.frame = (boy.frame + 1) % 8
-        # boy.x += boy.dir * 5
 
-        player.frame = (player.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) % 4
-
-        player.x += player.dir * RUN_SPEED_PPS * game_framework.frame_time
+        player.frame = 3+(player.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) %3
+        if player.dir==0:
+            player.y += 1* RUN_SPEED_PPS * game_framework.frame_time
+        elif player.dir==1:
+            player.x += 1 * RUN_SPEED_PPS * game_framework.frame_time
+        elif player.dir==2:
+            player.x -= 1 * RUN_SPEED_PPS * game_framework.frame_time
+        else:
+            player.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
         pass
 
     @staticmethod
-    def draw(boy):
-        boy.image.clip_draw(int(boy.frame) * 100, boy.action * 100, 100, 100, boy.x, boy.y)
+    def draw(player):
+        player.image.clip_draw(int(player.frame) * 75, int(player.action)* 75, 75, 75, int(player.x), int(player.y),100,100)
 
 
 # 상=0 / 우=1 / 좌=2 / 하=3
 class Player:
     def __init__(self):
-        self.image=load_image('player.png')
+        self.image=load_image('player2.png')
         self.x,self.y=800,500
         self.face_dir=3
         self.dir=3
         self.key_count=0
+        self.frame=0
+        self.action=0
         self.state_machine=StateMachine(self)
         self.state_machine.start(Idle)
         self.state_machine.set_transitions(
             {
-                Idle: {right_down: Run, left_down: Run, left_up: Run, right_up: Run, up_down:Run,up_up:Run,down_down:Run,down_up:Run, space_down: self.attack},
-                Run: {right_down: Idle, left_down: Idle, right_up: Idle, left_up: Idle, up_down:Idle,up_up:Idle,down_down:Idle,down_up:Idle, space_down: self.attack}
+                Idle: {right_down: Run, left_down: Run, up_down:Run, down_down:Run, space_down: self.attack},
+                Run: {right_up: Idle, left_up: Idle, up_up:Idle, down_up:Idle, space_down: self.attack}
             }
         )
 
@@ -99,7 +122,7 @@ class Player:
         pass
 
     def get_bb(self):
-        return self.x-10,self.y-10,self.x+10,self.y+10
+        return self.x-30,self.y-40,self.x+10,self.y+20
         pass
 
     def attack(self):
