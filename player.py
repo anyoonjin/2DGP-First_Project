@@ -1,6 +1,10 @@
 from pico2d import *
+
+import game_world
 from state_machine import *
 import game_framework
+from Weapon import Arrow
+
 # Boy Run Speed
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
 RUN_SPEED_KMPH = 20.0  # Km / Hour
@@ -13,6 +17,7 @@ TIME_PER_ACTION = 0.8
 ACTION_PER_TIME = 2.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 4
 
+#상하 키 누르다가 좌우 키 동시에 누르면 눌린키와 반대방향으로 이동함
 # 상=0 / 우=1 / 좌=2 / 하=3
 class Idle:
     @staticmethod
@@ -26,9 +31,9 @@ class Idle:
         elif left_down(e) or right_up(e):
             player.action = 1
             player.face_dir = 1
-        elif down_down(e) or down_up(e):  # 아래로 RUN
+        elif down_down(e) or up_up(e):  # 아래로 RUN
             player.face_dir, player.action = 3, 3
-        elif up_down(e) or up_down(e):  # 위로 RUN
+        elif up_down(e) or down_down(e):  # 위로 RUN
             player.face_dir, player.action = 0, 0
 
         player.frame = 0
@@ -37,7 +42,10 @@ class Idle:
 
     @staticmethod
     def exit(player, e):
-        pass
+        print(f"뭔놈의 event: {e}")
+        print(f"x={player.x}  y={player.y}")
+        if space_down(e):
+            player.attack()
 
     @staticmethod
     def do(player):
@@ -46,9 +54,9 @@ class Idle:
 
     @staticmethod
     def draw(player):
-        player.image.clip_draw(int(player.frame )* 75,int(player.action)* 75, 75, 75, int(player.x),int( player.y),100,100)
+        player.image.clip_draw(int(player.frame )* 75,int(player.action)* 75, 75, 75, int(player.x),int( player.y),120,120)
 
-
+# 상=0 / 우=1 / 좌=2 / 하=3
 class Run:
     @staticmethod
     def enter(player, e):
@@ -56,13 +64,15 @@ class Run:
             player.dir, player.face_dir, player.action = 1, 1, 1
         elif left_down(e) or right_up(e): # 왼쪽으로 RUN
             player.dir, player.face_dir, player.action = 2, 2, 2
-        elif down_down(e) or down_up(e):    #아래로 RUN
+        elif down_down(e) or up_up(e):    #아래로 RUN
             player.dir, player.face_dir, player.action = 3, 3, 3
-        elif up_down(e) or up_down(e):  #위로 RUN
+        elif up_down(e) or down_up(e):  #위로 RUN
             player.dir, player.face_dir, player.action = 0, 0, 0
 
     @staticmethod
     def exit(player, e):
+        print(f"뭔이벤트냐..event: {e}")
+        print(f"x={player.x}  y={player.y}")
         if space_down(e):
             player.attack()
 
@@ -77,13 +87,13 @@ class Run:
             player.x += 1 * RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==2:
             player.x -= 1 * RUN_SPEED_PPS * game_framework.frame_time
-        else:
+        elif player.dir==3:
             player.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
         pass
 
     @staticmethod
     def draw(player):
-        player.image.clip_draw(int(player.frame) * 75, int(player.action)* 75, 75, 75, int(player.x), int(player.y),100,100)
+        player.image.clip_draw(int(player.frame) * 75, int(player.action)* 75, 75, 75, int(player.x), int(player.y),120,120)
 
 
 # 상=0 / 우=1 / 좌=2 / 하=3
@@ -100,8 +110,8 @@ class Player:
         self.state_machine.start(Idle)
         self.state_machine.set_transitions(
             {
-                Idle: {right_down: Run, left_down: Run, up_down:Run, down_down:Run, space_down: self.attack},
-                Run: {right_up: Idle, left_up: Idle, up_up:Idle, down_up:Idle, space_down: self.attack}
+                Idle: {right_down: Run, left_down: Run,up_down:Run,down_down:Run, left_up: Run, right_up: Run,up_up:Run,down_up:Run},
+                Run: {right_down: Idle, left_down: Idle,up_down:Idle, down_down:Idle, left_up: Idle, right_up: Idle ,up_up:Idle ,down_up:Idle }
             }
         )
 
@@ -122,10 +132,13 @@ class Player:
         pass
 
     def get_bb(self):
-        return self.x-30,self.y-40,self.x+10,self.y+20
+        return self.x-30,self.y-50,self.x+10,self.y
         pass
 
     def attack(self):
+        arrow= Arrow(self.x,self.y,self.dir)
+        game_world.add_object(arrow,1)
+
         pass
 
     def handle_collision(self, group, other):

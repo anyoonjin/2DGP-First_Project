@@ -1,9 +1,11 @@
 from pico2d import *
+from pygame.examples.cursors import image
 
 import game_world
 import game_framework
 from player import Player
 from background import Background
+from zombie import Wall
 from Weapon import Arrow
 
 def handle_events():
@@ -18,13 +20,16 @@ def handle_events():
 
 
 def init():
-    global player
+    global player,wall
 
     b_g=Background()
     game_world.add_object(b_g,0)
 
     player=Player()
     game_world.add_object(player,1)
+
+    wall=Wall(1100,698,1195,115)
+    game_world.add_object(wall, 1)
 
 
 def finish():

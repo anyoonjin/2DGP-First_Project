@@ -19,3 +19,28 @@ class Zombie:
 
     def handle_collision(self, group, other):
         pass
+
+
+class Wall:
+    def __init__(self,x1=100,y1=100,x2=200,y2=200):
+        self.x1,self.x2,self.y1,self.y2=x1,x2,y1,y2
+        pass
+
+    def update(self):
+        pass
+
+    def draw(self):
+        draw_rectangle(*self.get_bb())
+        pass
+
+    def get_bb(self):
+        return self.x1, self.y1, self.x2, self.y2
+        pass
+
+    def attack(self):
+        pass
+
+    def handle_collision(self, group, other):
+        if group =='player:wall':
+            pass
+        pass
