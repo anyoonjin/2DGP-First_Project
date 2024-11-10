@@ -1,4 +1,6 @@
 from pico2d import *
+import game_world
+import game_framework
 
 class Zombie:
 
@@ -34,7 +36,7 @@ class Wall:
         pass
 
     def get_bb(self):
-        return self.x1, self.y1, self.x2, self.y2
+        return self.x1, self.y2, self.x2, self.y1
         pass
 
     def attack(self):
@@ -42,5 +44,6 @@ class Wall:
 
     def handle_collision(self, group, other):
         if group =='player:wall':
+            print('------------------------------------------------------player:wall')
             pass
         pass

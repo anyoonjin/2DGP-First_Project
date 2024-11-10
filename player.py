@@ -86,7 +86,8 @@ class Run:
         elif player.dir==1:
             player.x += 1 * RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==2:
-            player.x -= 1 * RUN_SPEED_PPS * game_framework.frame_time
+            if player.x>=105:
+                player.x -= 1 * RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==3:
             player.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
         pass
@@ -142,9 +143,19 @@ class Player:
         pass
 
     def handle_collision(self, group, other):
-        if group=='boy:key':
+        if group=='player:key':
             self.key_count+=1
 
-        if group =='boy:zombie':
+        elif group =='player:zombie':
             close_canvas()
-        pass
+
+        elif group =='player:wall':
+            print('----------------------------player:wall')
+            if self.dir == 0:
+                self.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
+            elif self.dir == 1:
+                self.x -= 1 * RUN_SPEED_PPS * game_framework.frame_time
+            elif self.dir == 2:
+                self.x += 1 * RUN_SPEED_PPS * game_framework.frame_time
+            elif self.dir == 3:
+                self.y += 1 * RUN_SPEED_PPS * game_framework.frame_time
