@@ -19,6 +19,6 @@ def update_world():
 
 '''
 
-open_canvas(1300,1000)
+open_canvas(1600,1000)
 game_framework.run(start_mode)
 close_canvas()

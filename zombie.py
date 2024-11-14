@@ -24,11 +24,14 @@ class Zombie:
 
 
 class Wall:
-    def __init__(self,x1=100,y1=100,x2=200,y2=200):
+    def __init__(self,x1=100,y1=100.0,x2=200,y2=200.0):
         self.x1,self.x2,self.y1,self.y2=x1,x2,y1,y2
         pass
 
-    def update(self):
+    def update(self, val: float = 0.0):
+        if (self.y1 > 20.0):
+            self.y1 += val
+            self.y2 += val
         pass
 
     def draw(self):

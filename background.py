@@ -8,13 +8,21 @@ from pico2d import close_canvas
 class Background:
     def __init__(self):
         self.image = load_image('BackGround.png')
+        self.x1=0
+        self.y1=180.0
 
-    def update(self):
+    def update(self,val:float = 0.0):
+        if(self.y1>20.0):
+            self.y1+=val
         pass
 
     def draw(self):
         #self.image.draw(650,400)
-        self.image.clip_draw(0, 180,1300, 800, 800, 500, 1600, 1000)
+        self.image.clip_draw(self.x1, int(self.y1),1300, 800, 800, 500, 1600, 1000)
+
+    def check(self):
+        print(f'~~~~~~~~~~~bg x1{self.x1},    bg y1{self.y1}')
+        return self.x1,self.y1
 
 '''
 back = Background()

@@ -18,9 +18,12 @@ def handle_events():
         else:
             player.handle_event(event)
 
+def update_Wall(val):
+    for wall in walls:
+        wall.update(val)
 
 def init():
-    global player,walls
+    global  b_g, player,walls
 
     walls=[]
 
@@ -50,6 +53,9 @@ def init():
     game_world.add_object(wall, 1)
     walls.append(wall)
 
+    wall = Wall(50, 830, 280, 750)  # 선생님책상
+    game_world.add_object(wall, 1)
+    walls.append(wall)
 
     game_world.add_collision_pair('player:wall',player,None)
     for wall in walls:

@@ -4,6 +4,9 @@ import game_world
 from state_machine import *
 import game_framework
 from Weapon import Arrow
+import play_mode
+import background
+import zombie
 
 # Boy Run Speed
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
@@ -79,17 +82,26 @@ class Run:
     # 상=0 / 우=1 / 좌=2 / 하=3
     @staticmethod
     def do(player):
-
+        bg_x1,bg_y1= play_mode.b_g.check()
         player.frame = 3+(player.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) %3
         if player.dir==0:
             player.y += 1* RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==1:
-            player.x += 1 * RUN_SPEED_PPS * game_framework.frame_time
+            if player.x <=1520:
+                player.x += 1 * RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==2:
             if player.x>=105:
                 player.x -= 1 * RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==3:
-            player.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
+            if  bg_y1>20  :    #밑으로 내려갈 배경이 남았을 때/ 남지않았으면 50
+                play_mode.b_g.update(-0.5)
+                play_mode.update_Wall(0.63)
+                #play_mode.b_g.check()
+            elif player.y>=100 and bg_y1==20 :
+                player.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
+
+                #print(f'~~~~~~~~~~ BG Y:{player.b_g.y1}')
+
         pass
 
     @staticmethod
