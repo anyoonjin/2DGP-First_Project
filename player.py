@@ -85,7 +85,11 @@ class Run:
         bg_x1,bg_y1= play_mode.b_g.check()
         player.frame = 3+(player.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) %3
         if player.dir==0:
-            player.y += 1* RUN_SPEED_PPS * game_framework.frame_time
+            if player.y<=950 :
+                player.y += 1* RUN_SPEED_PPS * game_framework.frame_time
+            elif bg_y1<=1000 and player.y>=800:
+                play_mode.b_g.update(0.5)
+                play_mode.update_Wall(-0.63)
         elif player.dir==1:
             if player.x <=1520:
                 player.x += 1 * RUN_SPEED_PPS * game_framework.frame_time
@@ -93,11 +97,11 @@ class Run:
             if player.x>=105:
                 player.x -= 1 * RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==3:
-            if  bg_y1>20  :    #밑으로 내려갈 배경이 남았을 때/ 남지않았으면 50
+            if  bg_y1>20 and player.y<=600 :    #밑으로 내려갈 배경이 남았을 때/ 남지않았으면 50
                 play_mode.b_g.update(-0.5)
                 play_mode.update_Wall(0.63)
                 #play_mode.b_g.check()
-            elif player.y>=100 and bg_y1==20 :
+            elif player.y>=100 :
                 player.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
 
                 #print(f'~~~~~~~~~~ BG Y:{player.b_g.y1}')

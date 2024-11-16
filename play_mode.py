@@ -37,7 +37,7 @@ def init():
     game_world.add_object(wall, 1)
     walls.append(wall)
 
-    wall=Wall(1100,1000,1190,800)    #윗문벽
+    wall=Wall(1100,1680,1190,800)    #윗문벽
     game_world.add_object(wall, 1)
     walls.append(wall)
 
@@ -49,7 +49,7 @@ def init():
     game_world.add_object(wall, 1)
     walls.append(wall)
 
-    wall = Wall(0, 1000, 1000, 905)  # 칠판벽
+    wall = Wall(0, 1230, 1100, 905)  # 칠판벽
     game_world.add_object(wall, 1)
     walls.append(wall)
 
