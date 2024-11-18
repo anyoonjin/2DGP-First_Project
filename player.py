@@ -87,7 +87,7 @@ class Run:
         if player.dir==0:
             if player.y<=950 :
                 player.y += 1* RUN_SPEED_PPS * game_framework.frame_time
-            elif bg_y1<=1000 and player.y>=800:
+            elif bg_y1<=1400 and player.y>=800:
                 play_mode.b_g.update(0.5)
                 play_mode.update_Wall(-0.63)
         elif player.dir==1:
