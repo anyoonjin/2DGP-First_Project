@@ -7,6 +7,7 @@ from Weapon import Arrow
 import play_mode
 import background
 import zombie
+import server
 
 # Boy Run Speed
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
@@ -83,13 +84,13 @@ class Run:
     # 상=0 / 우=1 / 좌=2 / 하=3
     @staticmethod
     def do(player):
-        bg_x1,bg_y1= play_mode.b_g.check()
+        bg_x1,bg_y1= server.b_g.check()
         player.frame = 3+(player.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) %3
         if player.dir==0:
             if player.y<=950 :
                 player.y += 1* RUN_SPEED_PPS * game_framework.frame_time
             elif bg_y1<=1400 and player.y>=800:
-                play_mode.b_g.update(0.5)
+                server.b_g.update(0.5)
                 play_mode.update_Wall(-0.63)
         elif player.dir==1:
             if player.x <=1520:
@@ -99,7 +100,7 @@ class Run:
                 player.x -= 1 * RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==3:
             if  bg_y1>20 and player.y<=600 :    #밑으로 내려갈 배경이 남았을 때/ 남지않았으면 50
-                play_mode.b_g.update(-0.5)
+                server.b_g.update(-0.5)
                 play_mode.update_Wall(0.63)
                 #play_mode.b_g.check()
             elif player.y>=100 :

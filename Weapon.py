@@ -14,13 +14,13 @@ class Arrow:
 
     def update(self):
         if self.dir == 0:
-            self.y += 3 * 100 * game_framework.frame_time
+            self.y += 8 * 100 * game_framework.frame_time
         elif self.dir == 1:
-            self.x += 3 * 100 * game_framework.frame_time
+            self.x += 8 * 100 * game_framework.frame_time
         elif self.dir == 2:
-            self.x -= 3 * 100 * game_framework.frame_time
+            self.x -= 8 * 100 * game_framework.frame_time
         elif self.dir == 3:
-            self.y -= 3 * 100 * game_framework.frame_time
+            self.y -= 8 * 100 * game_framework.frame_time
 
         if self.x < 10 or self.x > 1600 - 10:
             game_world.remove_object(self)
@@ -55,25 +55,4 @@ class Arrow:
 
     def handle_collision(self, group, other):
 
-        pass
-
-class Bomb:
-    image = None
-
-    def __init__(self):
-        pass
-
-    def update(self):
-        pass
-
-    def draw(self):
-        pass
-
-    def get_bb(self):
-        pass
-
-    def attack(self):
-        pass
-
-    def handle_collision(self, group, other):
         pass

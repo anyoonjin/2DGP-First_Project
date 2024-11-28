@@ -1,5 +1,6 @@
 from pico2d import *
 from pico2d import close_canvas
+import server
 
 #from main import update_world
 
@@ -21,7 +22,7 @@ class Background:
         self.image.clip_draw(self.x1, int(self.y1),1300, 800, 800, 500, 1600, 1000)
 
     def check(self):
-        print(f'~~~~~~~~~~~bg x1{self.x1},    bg y1{self.y1}')
+       # print(f'~~~~~~~~~~~bg x1{self.x1},    bg y1{self.y1}')
         return self.x1,self.y1
 
 '''

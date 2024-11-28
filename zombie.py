@@ -29,9 +29,9 @@ class Wall:
         pass
 
     def update(self, val: float = 0.0):
-        if (self.y1 > 20.0):
-            self.y1 += val
-            self.y2 += val
+        #if (self.y1 > 20.0):
+        self.y1 += val
+        self.y2 += val
         pass
 
     def draw(self):
