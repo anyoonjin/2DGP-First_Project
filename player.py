@@ -28,16 +28,17 @@ class Idle:
         if start_event(e):
             player.action = 3
             player.face_dir = 3
-        elif right_down(e) or left_up(e):
+        elif right_down(e) or left_up(e) or up_up(e) or down_up(e):
             player.action = 2
             player.face_dir = 2
-        elif left_down(e) or right_up(e):
+        elif left_down(e) or right_up(e) or up_up(e) or down_up(e):
             player.action = 1
             player.face_dir = 1
-        elif down_down(e) or up_up(e):  # 아래로 RUN
+        elif down_down(e) or up_up(e) or right_up(e) or left_up(e):  # 아래로 RUN
             player.face_dir, player.action = 3, 3
-        elif up_down(e) or down_down(e):  # 위로 RUN
+        elif up_down(e) or down_down(e) or right_up(e) or left_up(e):  # 위로 RUN
             player.face_dir, player.action = 0, 0
+
 
         player.frame = 0
         player.wait_time = get_time()
@@ -63,13 +64,13 @@ class Idle:
 class Run:
     @staticmethod
     def enter(player, e):
-        if right_down(e) or left_up(e): # 오른쪽으로 RUN
+        if right_down(e) or left_up(e) or up_up(e) or down_up(e):   # 오른쪽으로 RUN
             player.dir, player.face_dir, player.action = 1, 1, 1
-        elif left_down(e) or right_up(e): # 왼쪽으로 RUN
+        elif left_down(e) or right_up(e) or up_up(e) or down_up(e): # 왼쪽으로 RUN
             player.dir, player.face_dir, player.action = 2, 2, 2
-        elif down_down(e) or up_up(e):    #아래로 RUN
+        elif down_down(e) or up_up(e) or right_up(e) or left_up(e):    #아래로 RUN
             player.dir, player.face_dir, player.action = 3, 3, 3
-        elif up_down(e) or down_up(e):  #위로 RUN
+        elif up_down(e) or down_down(e) or right_up(e) or left_up(e):    #위로 RUN
             player.dir, player.face_dir, player.action = 0, 0, 0
 
     @staticmethod
@@ -127,8 +128,8 @@ class Player:
         self.state_machine.start(Idle)
         self.state_machine.set_transitions(
             {
-                Idle: {right_down: Run, left_down: Run,up_down:Run,down_down:Run, left_up: Run, right_up: Run,up_up:Run,down_up:Run},
-                Run: {right_down: Idle, left_down: Idle,up_down:Idle, down_down:Idle, left_up: Idle, right_up: Idle ,up_up:Idle ,down_up:Idle }
+                Idle: {right_down: Run, left_down: Run, up_down:Run, down_down:Run, left_up: Run, right_up: Run,up_up:Run,down_up:Run,space_down:Idle },
+                Run: {right_down: Idle, left_down: Idle,up_down:Idle, down_down:Idle, left_up: Idle, right_up: Idle ,up_up:Idle ,down_up:Idle ,space_down:Run }
             }
         )
 
