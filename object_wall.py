@@ -51,7 +51,7 @@ server.walls.append(wall)
 wall = Wall(500, 750, 680, 700)     #교탁
 game_world.add_object(wall, 1)
 server.walls.append(wall)
-wall = Wall(0, 1230, 1100, 905)  # 칠판벽
+wall = Wall(0, 1230, 1020, 905)  # 칠판벽
 game_world.add_object(wall, 1)
 server.walls.append(wall)
 wall = Wall(50, 830, 280, 750)  # 선생님책상
