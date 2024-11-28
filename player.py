@@ -87,7 +87,7 @@ class Run:
         bg_x1,bg_y1= server.b_g.check()
         player.frame = 3+(player.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) %3
         if player.dir==0:
-            if player.y<=950 :
+            if player.y<=850 :
                 player.y += 1* RUN_SPEED_PPS * game_framework.frame_time
             elif bg_y1<=1400 and player.y>=800:
                 server.b_g.update(0.5)
@@ -103,7 +103,7 @@ class Run:
                 server.b_g.update(-0.5)
                 play_mode.update_Wall(0.63)
                 #play_mode.b_g.check()
-            elif player.y>=100 :
+            elif player.y>=80 :
                 player.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
 
                 #print(f'~~~~~~~~~~ BG Y:{player.b_g.y1}')
