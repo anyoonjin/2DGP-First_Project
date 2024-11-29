@@ -177,3 +177,8 @@ class Player:
                 self.x += 1 * RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 3:
                 self.y += 1 * RUN_SPEED_PPS * game_framework.frame_time
+
+        elif group == 'player:key':
+            self.key_count+=1
+            if self.key_count==3:
+                pass    # 탈출구 오픈!
