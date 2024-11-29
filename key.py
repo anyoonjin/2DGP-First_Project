@@ -9,7 +9,7 @@ import server
 class Key:
     image=None
     # 상=0 / 우=1 / 좌=2 / 하=3
-    def __init__(self,x=400,y=300):
+    def __init__(self,x=1050,y=2190):
         if Key.image==None:
             Key.image=load_image('key.png')
             print("key.image is not loaded properly.")
@@ -32,14 +32,18 @@ class Key:
     def handle_collision(self, group, other):
         if group == 'player:key':
             game_world.remove_object(self)
+
         pass
 
 class key_open_text:
-    def __init__(self):
-        key_open_text.image = load_image(f'key_open{server.player.key_count+1}.png')
-
+    def __init__(self,num =1):
+        key_open_text.image = load_image(f'key_open{num}.png')
+        self.count=0
 
     def update(self):
+        self.count+=1
+        if self.count==1800:
+            game_world.remove_object(self)
         pass
 
     def draw(self):

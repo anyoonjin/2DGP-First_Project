@@ -8,9 +8,9 @@ from background import Background, Cover
 from Weapon import Arrow
 import server
 import object_wall
+import key
 
 server.start_time=get_time()
-
 
 def handle_events():
     events=get_events()
@@ -26,7 +26,11 @@ def update_Wall(val):
     for wall in server.walls:
         wall.update(val)
 
+
 def init():
+    server.key1 = key.Key()
+    server.key2 = key.Key(120, 2020)
+    server.key3 = key.Key()
 
     server.b_g=Background()
     game_world.add_object(server.b_g,0)

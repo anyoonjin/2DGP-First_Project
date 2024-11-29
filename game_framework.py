@@ -5,6 +5,8 @@ from pico2d import get_time
 import server
 import key
 import game_world
+import play_mode
+from server import player
 
 
 def change_mode(mode):
@@ -45,9 +47,11 @@ def quit():
 
 
 def run(start_mode):
+    global s_k,t_k
     global first_key
     first_key=False
-    server.start_time =get_time()
+    second_key=False
+    third_key=False
 
     global running, stack
     running = True
@@ -60,14 +64,26 @@ def run(start_mode):
     while running:
         print(f"경과 시간: {get_time() - server.start_time}")
         if not first_key and 5.0 <= get_time() - server.start_time <= 5.9:
-            print('30초다!!!!!!!!!')
-            server.key = key.Key()
-            game_world.add_object(server.key, 1)
+            game_world.add_object(server.key1, 1)
             game_world.add_collision_pair('player:key', server.player, None)
-            game_world.add_collision_pair('player:key', None, server.key)
+            game_world.add_collision_pair('player:key', None, server.key1)
             text_key = key.key_open_text()
             game_world.add_object(text_key, 1)
             first_key = True
+        elif not second_key and server.player.key_count==1 :
+            game_world.add_object(server.key2, 1)
+            game_world.add_collision_pair('player:key', server.player, None)
+            game_world.add_collision_pair('player:key', None, server.key2)
+            text_key = key.key_open_text(2)
+            game_world.add_object(text_key, 1)
+            second_key = True
+        elif not third_key and server.player.key_count==2 :
+            game_world.add_object(server.key3, 1)
+            game_world.add_collision_pair('player:key', server.player, None)
+            game_world.add_collision_pair('player:key', None, server.key3)
+            text_key = key.key_open_text(3)
+            game_world.add_object(text_key, 1)
+            third_key = True
         stack[-1].handle_events()
         stack[-1].update()
         stack[-1].draw()
