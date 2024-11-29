@@ -127,7 +127,7 @@ wall=Wall(80,1970,145,1720)    #왼쪽 사물함
 game_world.add_object(wall, 1)
 server.walls.append(wall)
 
-wall=Wall(0,1980,90,1000)    #왼쪽 벽
+wall=Wall(0,3000,90,1000)    #왼쪽 벽
 game_world.add_object(wall, 1)
 server.walls.append(wall)
 
