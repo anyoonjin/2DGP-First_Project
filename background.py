@@ -25,14 +25,14 @@ class Background:
        # print(f'~~~~~~~~~~~bg x1{self.x1},    bg y1{self.y1}')
         return self.x1,self.y1
 
-'''
-back = Background()
 
-while(True):
-    clear_canvas()
-    back.draw()
-    update_canvas()
+class Cover:
+    def __init__(self):
+        self.image = load_image('cover.png')
 
-close_canvas()
+    def update(self):
+        pass
 
-'''
+    def draw(self):
+        # self.image.draw(650,400)
+        self.image.clip_draw(0,0, 600, 400, 800, 500, 1600, 1000)

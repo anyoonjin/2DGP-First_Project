@@ -35,18 +35,15 @@ class Key:
         pass
 
 class key_open_text:
-    image = None
-
     def __init__(self):
-        if key_open_text.image == None:
-            key_open_text.image = load_image('key_open1.png')
+        key_open_text.image = load_image(f'key_open{server.player.key_count+1}.png')
 
 
     def update(self):
         pass
 
     def draw(self):
-        self.image.clip_draw(0, 0, 400, 100,800, 750,800,200)
+        self.image.clip_draw(0, 0, 500, 100,800, 750,1000,200)
         pass
 
     def get_bb(self):
