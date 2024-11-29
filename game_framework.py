@@ -1,5 +1,11 @@
 import time
 
+from pico2d import get_time
+
+import server
+import key
+import game_world
+
 
 def change_mode(mode):
     global stack
@@ -39,6 +45,10 @@ def quit():
 
 
 def run(start_mode):
+    global first_key
+    first_key=False
+    server.start_time =get_time()
+
     global running, stack
     running = True
     stack = [start_mode]
@@ -48,6 +58,16 @@ def run(start_mode):
     frame_time = 0.0
     current_time = time.time()
     while running:
+        print(f"경과 시간: {get_time() - server.start_time}")
+        if not first_key and 5.0 <= get_time() - server.start_time <= 5.9:
+            print('30초다!!!!!!!!!')
+            server.key = key.Key()
+            game_world.add_object(server.key, 1)
+            game_world.add_collision_pair('player:key', server.player, None)
+            game_world.add_collision_pair('player:key', None, server.key)
+            text_key = key.key_open_text()
+            game_world.add_object(text_key, 1)
+            first_key = True
         stack[-1].handle_events()
         stack[-1].update()
         stack[-1].draw()

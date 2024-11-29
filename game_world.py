@@ -1,5 +1,9 @@
 # world[0] : 백그라운드 객체들
 # world[1] : foreground 객체들
+from pico2d import get_time
+
+import server
+
 world = [[]for _ in range(4)]
 collision_pairs={}
 

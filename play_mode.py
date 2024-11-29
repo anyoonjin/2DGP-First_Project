@@ -5,10 +5,12 @@ import game_world
 import game_framework
 from player import Player
 from background import Background
-from zombie import Wall
 from Weapon import Arrow
 import server
 import object_wall
+
+server.start_time=get_time()
+
 
 def handle_events():
     events=get_events()
@@ -35,6 +37,8 @@ def init():
     game_world.add_collision_pair('player:wall',server.player,None)
     for wall in server.walls:
         game_world.add_collision_pair('player:wall',None,wall)
+
+
 
 
 
