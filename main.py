@@ -3,7 +3,6 @@ import game_framework
 
 import logo_mode as start_mode
 import server
-
 '''
 def reset_world():
 
@@ -22,4 +21,5 @@ def update_world():
 
 open_canvas(1600,1000)
 game_framework.run(start_mode)
+server.mode='logo'
 close_canvas()

@@ -8,7 +8,7 @@ class Arrow:
     def __init__(self,x=400,y=300 ,dir=0):
         if Arrow.image==None:
             Arrow.image=load_image('arrow.png')
-            print("Arrow.image is not loaded properly.")
+            #print("Arrow.image is not loaded properly.")
         self.x,self.y,self.dir=x,y,dir
 
 
@@ -27,7 +27,7 @@ class Arrow:
         pass
 
     def draw(self):
-        print(f"Drawing arrow at x={self.x}, y={self.y}, dir={self.dir}")
+        #print(f"Drawing arrow at x={self.x}, y={self.y}, dir={self.dir}")
         if self.dir==0:
             self.image.clip_composite_draw(0, 0, 200, 200,4.7, 'h', self.x-10, self.y, 100, 100)
         elif self.dir ==1:

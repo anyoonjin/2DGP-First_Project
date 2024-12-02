@@ -26,7 +26,7 @@ class Wall:
 
     def handle_collision(self, group, other):
         if group =='player:wall':
-            print('------------------------------------------------------player:wall')
+            #print('------------------------------------------------------player:wall')
             pass
         pass
 

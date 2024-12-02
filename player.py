@@ -91,7 +91,7 @@ class Run:
             if bg_y1<=1400 and player.y>=500:
                 server.b_g.update(0.5)
                 play_mode.update_Wall(-0.63)
-                for k in [server.key1, server.key2, server.key3,server.escape]:
+                for k in [server.key1, server.key2, server.key3,server.escape_open]:
                     if k is not None:
                         k.update(-0.63)
             elif player.y<=900 :
@@ -106,7 +106,7 @@ class Run:
             if  bg_y1>20 and player.y<=600 :    #밑으로 내려갈 배경이 남았을 때/ 남지않았으면 50
                 server.b_g.update(-0.5)
                 play_mode.update_Wall(0.63)
-                for k in [server.key1, server.key2, server.key3,server.escape]:
+                for k in [server.key1, server.key2, server.key3,server.escape_open]:
                     if k is not None:
                         k.update(0.63)
                 #play_mode.b_g.check()
@@ -132,6 +132,7 @@ class Player:
         self.key_count=0
         self.frame=0
         self.action=0
+        self.success=False
         self.state_machine=StateMachine(self)
         self.state_machine.start(Idle)
         self.state_machine.set_transitions(
@@ -175,7 +176,7 @@ class Player:
             close_canvas()
 
         elif group =='player:wall':
-            print('----------------------------player:wall')
+            #print('----------------------------player:wall')
             if self.dir == 0:
                 self.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 1:
@@ -186,4 +187,6 @@ class Player:
                 self.y += 1 * RUN_SPEED_PPS * game_framework.frame_time
 
         elif group =='player:escape':
+            self.success=True
             print("탈출성공!!!!")
+

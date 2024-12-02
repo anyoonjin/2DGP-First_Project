@@ -35,7 +35,7 @@ def up_up(e):
 
 #ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 def space_down(e):
-    print(e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_SPACE)
+    #print(e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_SPACE)
     return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_SPACE
 
 def time_out(e):
@@ -53,7 +53,7 @@ class StateMachine:
     def start(self, state):
         self.cur_state = state
 
-        print(f'Enter into {state}')
+        #print(f'Enter into {state}')
         self.cur_state.enter(self.o, ('START', 0))
 
     def add_event(self, e):
@@ -75,10 +75,10 @@ class StateMachine:
     def handle_event(self, e):
         for event, next_state in self.transitions[self.cur_state].items():
             if event(e):
-                print(f'Exit from {self.cur_state}')
+                #print(f'Exit from {self.cur_state}')
                 self.cur_state.exit(self.o, e)
                 self.cur_state = next_state
-                print(f'Enter into {self.cur_state}')
+               # print(f'Enter into {self.cur_state}')
                 self.cur_state.enter(self.o, e)
                 return
 

@@ -2,6 +2,7 @@ from pico2d import load_image, get_time, clear_canvas, update_canvas, get_events
 
 import game_framework as game_framework
 import play_mode
+import server
 
 
 def handle_events():
@@ -24,6 +25,7 @@ def update():
     if get_time() - logo_start_time >= 2.0:
         logo_start_time = get_time()
         game_framework.change_mode(play_mode)
+        server.mode='play'
 
 
 def draw():

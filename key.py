@@ -13,7 +13,6 @@ class Key:
     def __init__(self,x=1050,y=2190):
         if Key.image==None:
             Key.image=load_image('key.png')
-            print("key.image is not loaded properly.")
         self.x,self.y=x,y
         self.check_key=False
 
@@ -28,7 +27,7 @@ class Key:
         pass
 
     def get_bb(self):
-        return self.x - 15, self.y +20, self.x +15, self.y-10
+        return self.x - 15, self.y -20, self.x +15, self.y+10
         pass
 
     def handle_collision(self, group, other):
@@ -83,10 +82,10 @@ class Escape:
         pass
 
     def get_bb(self):
-        return self.x - 50, self.y +40, self.x +50, self.y-40
+        return self.x - 50, self.y -40, self.x +50, self.y+40
         pass
 
     def handle_collision(self, group, other):
         if group == 'player:escape': #게임오버로 넘어감
-            
+            print('탈출구 충돌체크')
             pass
