@@ -85,15 +85,17 @@ class Run:
     # 상=0 / 우=1 / 좌=2 / 하=3
     @staticmethod
     def do(player):
-        bg_x1,bg_y1= server.b_g.check()
+        if server.mode == 'play':
+            bg_x1,bg_y1= server.b_g.check()
         player.frame = 3+(player.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) %3
         if player.dir==0:
-            if bg_y1<=1400 and player.y>=500:
-                server.b_g.update(0.5)
-                play_mode.update_Wall(-0.63)
-                for k in [server.key1, server.key2, server.key3,server.escape_open]:
-                    if k is not None:
-                        k.update(-0.63)
+            if server.mode=='play':
+                if bg_y1<=1400 and player.y>=500:
+                    server.b_g.update(0.5)
+                    play_mode.update_Wall(-0.63)
+                    for k in [server.key1, server.key2, server.key3,server.escape_open]:
+                        if k is not None:
+                            k.update(-0.63)
             elif player.y<=900 :
                 player.y += 1* RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==1:
@@ -103,12 +105,13 @@ class Run:
             if player.x>=105:
                 player.x -= 1 * RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==3:
-            if  bg_y1>20 and player.y<=600 :    #밑으로 내려갈 배경이 남았을 때/ 남지않았으면 50
-                server.b_g.update(-0.5)
-                play_mode.update_Wall(0.63)
-                for k in [server.key1, server.key2, server.key3,server.escape_open]:
-                    if k is not None:
-                        k.update(0.63)
+            if server.mode == 'play':
+                if  bg_y1>20 and player.y<=600 :    #밑으로 내려갈 배경이 남았을 때/ 남지않았으면 50
+                    server.b_g.update(-0.5)
+                    play_mode.update_Wall(0.63)
+                    for k in [server.key1, server.key2, server.key3,server.escape_open]:
+                        if k is not None:
+                            k.update(0.63)
                 #play_mode.b_g.check()
             elif player.y>=80 :
                 player.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
