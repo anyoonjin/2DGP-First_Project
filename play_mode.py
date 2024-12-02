@@ -30,7 +30,8 @@ def update_Wall(val):
 def init():
     server.key1 = key.Key()
     server.key2 = key.Key(120, 2020)
-    server.key3 = key.Key()
+    server.key3 = key.Key(500,2020)
+    server.escape=key.Escape()
 
     server.b_g=Background()
     game_world.add_object(server.b_g,0)
@@ -41,6 +42,25 @@ def init():
     game_world.add_collision_pair('player:wall',server.player,None)
     for wall in server.walls:
         game_world.add_collision_pair('player:wall',None,wall)
+    '''
+    game_world.add_object(server.key1, 1)
+    game_world.add_collision_pair('player:key', server.player, None)
+    game_world.add_collision_pair('player:key', None, server.key1)
+    text_key = key.key_open_text()
+    game_world.add_object(text_key, 1)
+
+    game_world.add_object(server.key2, 1)
+    game_world.add_collision_pair('player:key', server.player, None)
+    game_world.add_collision_pair('player:key', None, server.key2)
+    text_key = key.key_open_text(2)
+    game_world.add_object(text_key, 1)
+
+    game_world.add_object(server.key3, 1)
+    game_world.add_collision_pair('player:key', server.player, None)
+    game_world.add_collision_pair('player:key', None, server.key3)
+    text_key = key.key_open_text(3)
+    game_world.add_object(text_key, 1)
+    '''
 
     server.cover=Cover()
     game_world.add_object(server.cover,2)

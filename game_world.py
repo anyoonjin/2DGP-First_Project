@@ -70,7 +70,7 @@ def handle_collisions():
         for a in pairs[0]:  #a리스트에서 하나 뽑고
             for b in pairs[1]:  #b리스트에서 하나 뽑고, 두개의 객체 가져오는거
                 if collide(a,b):
-                    print(f'{group}collide')
+                    #print(f'{group}collide')
                     a.handle_collision(group,b)
                     b.handle_collision(group,a)
 

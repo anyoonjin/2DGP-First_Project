@@ -91,7 +91,7 @@ class Run:
             if bg_y1<=1400 and player.y>=500:
                 server.b_g.update(0.5)
                 play_mode.update_Wall(-0.63)
-                for k in [server.key1, server.key2, server.key3]:
+                for k in [server.key1, server.key2, server.key3,server.escape]:
                     if k is not None:
                         k.update(-0.63)
             elif player.y<=900 :
@@ -106,7 +106,7 @@ class Run:
             if  bg_y1>20 and player.y<=600 :    #밑으로 내려갈 배경이 남았을 때/ 남지않았으면 50
                 server.b_g.update(-0.5)
                 play_mode.update_Wall(0.63)
-                for k in [server.key1, server.key2, server.key3]:
+                for k in [server.key1, server.key2, server.key3,server.escape]:
                     if k is not None:
                         k.update(0.63)
                 #play_mode.b_g.check()
@@ -169,10 +169,7 @@ class Player:
 
     def handle_collision(self, group, other):
         if group=='player:key':
-            self.key_count+=1
-            server.start_time=get_time()
-            if self.key_count==3:
-                pass    # 탈출구 오픈!
+            pass
 
         elif group =='player:zombie':
             close_canvas()
@@ -187,3 +184,6 @@ class Player:
                 self.x += 1 * RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 3:
                 self.y += 1 * RUN_SPEED_PPS * game_framework.frame_time
+
+        elif group =='player:escape':
+            print("탈출성공!!!!")

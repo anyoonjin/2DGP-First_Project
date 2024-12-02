@@ -1,3 +1,5 @@
+from xml.sax.saxutils import escape
+
 player = None
 b_g = None
 walls =None
@@ -6,3 +8,4 @@ key1=None
 key2=None
 key3=None
 cover=None
+escape=None
