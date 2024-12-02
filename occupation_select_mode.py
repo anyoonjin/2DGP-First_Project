@@ -27,8 +27,14 @@ def init():
     global boy
     boy=player.Player(800,400,170)
     game_world.add_object(boy,1)
-    wall=object_wall.Wall(1100,685,1190,115)
+
+    walls=[]
+    wall=object_wall.Wall(0,0,130,1600)
     game_world.add_object(wall,1)
+    walls.append(wall)
+    wall = object_wall.Wall(1460, 0, 1600, 1600)
+    game_world.add_object(wall, 1)
+    walls.append(wall)
     #logo_start_time = get_time()
 
 def finish():
