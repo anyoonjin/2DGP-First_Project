@@ -1,7 +1,7 @@
 from pico2d import open_canvas, delay, close_canvas, get_time
 import game_framework
 
-import occupation_select_mode as start_mode
+import play_mode as start_mode
 import server
 '''
 def reset_world():
@@ -21,5 +21,5 @@ def update_world():
 
 open_canvas(1600,1000)
 game_framework.run(start_mode)
-server.mode='logo'
+server.mode='play'
 close_canvas()
