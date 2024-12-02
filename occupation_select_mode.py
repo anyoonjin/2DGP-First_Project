@@ -29,12 +29,25 @@ def init():
     game_world.add_object(boy,1)
 
     walls=[]
-    wall=object_wall.Wall(0,0,130,1600)
+    wall=object_wall.Wall(0,1000,130,0)
     game_world.add_object(wall,1)
     walls.append(wall)
-    wall = object_wall.Wall(1460, 0, 1600, 1600)
+    wall = object_wall.Wall(1460, 1000, 1600, 0)
     game_world.add_object(wall, 1)
     walls.append(wall)
+    wall = object_wall.Wall(740, 620, 825, 500)
+    game_world.add_object(wall, 1)
+    walls.append(wall)
+    wall = object_wall.Wall(0, 1000, 1600, 750)
+    game_world.add_object(wall, 1)
+    walls.append(wall)
+    wall = object_wall.Wall(1300, 1000, 1600, 690)
+    game_world.add_object(wall, 1)
+    walls.append(wall)
+
+    game_world.add_collision_pair('player:wall', boy, None)
+    for wall in walls:
+        game_world.add_collision_pair('player:wall', None, wall)
     #logo_start_time = get_time()
 
 def finish():

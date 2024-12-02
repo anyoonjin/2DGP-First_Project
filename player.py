@@ -180,7 +180,7 @@ class Player:
             close_canvas()
 
         elif group =='player:wall':
-            #print('----------------------------player:wall')
+            print('----------------------------player:wall')
             if self.dir == 0:
                 self.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 1:

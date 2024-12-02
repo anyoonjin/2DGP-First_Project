@@ -67,6 +67,7 @@ def collide(a, b):
 def handle_collisions():
     #게임월드에 등록된 충돌정보를 바탕으로 실제 충돌검사를 수행
     for group, pairs in collision_pairs.items():
+
         print(f"Group: {group}")
         print("Objects in Group A:")
         for obj in pairs[0]:
