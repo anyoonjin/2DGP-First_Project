@@ -96,7 +96,6 @@ def update():
     if server.player.success:
        finish()
        game_framework.change_mode(logo_mode)
-       server.mode = 'logo'
 
 def draw():
     clear_canvas()

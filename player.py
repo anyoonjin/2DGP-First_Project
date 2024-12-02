@@ -60,7 +60,7 @@ class Idle:
 
     @staticmethod
     def draw(player):
-        player.image.clip_draw(int(player.frame )* 75,int(player.action)* 75, 75, 75, int(player.x),int( player.y),120,120)
+        player.image.clip_draw(int(player.frame )* 75,int(player.action)* 75, 75, 75, int(player.x),int( player.y),player.size,player.size)
 
 # 상=0 / 우=1 / 좌=2 / 하=3
 class Run:
@@ -119,19 +119,20 @@ class Run:
 
     @staticmethod
     def draw(player):
-        player.image.clip_draw(int(player.frame) * 75, int(player.action)* 75, 75, 75, int(player.x), int(player.y),120,120)
+        player.image.clip_draw(int(player.frame) * 75, int(player.action)* 75, 75, 75, int(player.x), int(player.y),player.size,player.size)
 
 
 # 상=0 / 우=1 / 좌=2 / 하=3
 class Player:
-    def __init__(self):
+    def __init__(self,x=800,y=500, size=120):
         self.image=load_image('player2.png')
-        self.x,self.y=800,500
+        self.x,self.y=x,y
         self.face_dir=3
         self.dir=3
         self.key_count=0
         self.frame=0
         self.action=0
+        self.size=size
         self.success=False
         self.state_machine=StateMachine(self)
         self.state_machine.start(Idle)

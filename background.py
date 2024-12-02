@@ -36,3 +36,6 @@ class Cover:
     def draw(self):
         # self.image.draw(650,400)
         self.image.clip_draw(0,0, 600, 400, 800, 500, 1600, 1000)
+
+class Back_occupation:
+    pass

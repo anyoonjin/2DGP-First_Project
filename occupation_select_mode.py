@@ -1,32 +1,48 @@
-from pico2d import load_image, get_time, clear_canvas, update_canvas, get_events
+from pico2d import *
 
-import src.config.game_framework as game_framework, src.mode.title_mode as title_mode
-import src.config.config as config
+import game_framework as game_framework
+import game_world
+import play_mode
+import server
+import object_wall
+import player
 
 
 def handle_events():
-    event = get_events()
+    events = get_events()
+    for event in events:
+        if event.type == SDL_QUIT:
+            game_framework.quit()
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            game_framework.quit()
+        else:
+            boy.handle_event(event)
 
 
 def init():
     global image
     global logo_start_time
-    image = load_image('./src/asset/tuk_credit.png')
-    logo_start_time = get_time()
+    image = load_image('occupation selection.png')
+    #game_world.add_object(b_g_image, 0)
+    global boy
+    boy=player.Player(800,400,170)
+    game_world.add_object(boy,1)
+    wall=object_wall.Wall(1100,685,1190,115)
+    game_world.add_object(wall,1)
+    #logo_start_time = get_time()
 
 def finish():
-    global image
-    del image
+    game_world.clear()
+    pass
 
 
 def update():
-    global logo_start_time
-    if get_time() - logo_start_time >= 2.0:
-        logo_start_time = get_time()
-        game_framework.change_mode(title_mode)
+    game_world.update()
+    game_world.handle_collisions()
 
 
 def draw():
     clear_canvas()
-    image.draw(config.screen_width / 2, config.screen_height / 2, config.screen_width, config.screen_height)
+    image.clip_draw(0,0,800,500,800,500,1600,1000)
+    game_world.render()
     update_canvas()
