@@ -132,6 +132,7 @@ class Player:
         self.x,self.y=x,y
         self.face_dir=3
         self.dir=3
+        self.choice=False
         self.key_count=0
         self.frame=0
         self.action=0

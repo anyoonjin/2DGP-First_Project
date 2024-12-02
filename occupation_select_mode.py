@@ -1,4 +1,5 @@
 from pico2d import *
+from pygame import get_error
 
 import game_framework as game_framework
 import game_world
@@ -6,7 +7,7 @@ import play_mode
 import server
 import object_wall
 import player
-
+import text
 
 def handle_events():
     events = get_events()
@@ -20,9 +21,10 @@ def handle_events():
 
 
 def init():
-    global image
+    global image,arrow_image
     global logo_start_time
     image = load_image('occupation selection.png')
+    arrow_image=load_image('아처.png')
     #game_world.add_object(b_g_image, 0)
     global boy
     boy=player.Player(800,400,170)
@@ -48,7 +50,10 @@ def init():
     game_world.add_collision_pair('player:wall', boy, None)
     for wall in walls:
         game_world.add_collision_pair('player:wall', None, wall)
-    #logo_start_time = get_time()
+
+    ch_text=text.Text()
+    game_world.add_object(ch_text,2)
+    logo_start_time = get_time()
 
 def finish():
     game_world.clear()
@@ -58,10 +63,17 @@ def finish():
 def update():
     game_world.update()
     game_world.handle_collisions()
+    global logo_start_time
+    if get_time() - logo_start_time >= 5.0 and not boy.choice:
+        ch_text = text.Text()
+        game_world.add_object(ch_text, 2)
+        logo_start_time=get_time()
+
 
 
 def draw():
     clear_canvas()
     image.clip_draw(0,0,800,500,800,500,1600,1000)
+    arrow_image.clip_draw(0, 0, 1025, 1031, 180, 780, 90, 90)
     game_world.render()
     update_canvas()
