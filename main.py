@@ -6,5 +6,5 @@ import server
 
 open_canvas(1600,1000)
 game_framework.run(start_mode)
-server.mode='play'
+server.mode='logo'
 close_canvas()

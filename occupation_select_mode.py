@@ -5,6 +5,7 @@ import game_framework as game_framework
 import game_world
 import play_mode
 import choice_mode_class
+import server
 import text
 
 def handle_events():
@@ -15,19 +16,20 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.quit()
         else:
-            boy.handle_event(event)
+            server.boy.handle_event(event)
 
 
 def init():
-    global image,arrow_image
-    global logo_start_time
+    global image,arrow_image,countdown
+    global logo_start_time, desk
+    global text_num
+    text_num=3
     image = load_image('occupation selection.png')
-    arrow_image=load_image('아처.png')
     #game_world.add_object(b_g_image, 0)
-    global boy
     boy=choice_mode_class.Player(800,400,170)
     game_world.add_object(boy,1)
-
+    logo_start_time,countdown=0.0,0.0
+    server.boy=boy
     ch_walls=[]
     wall=choice_mode_class.Wall(0,1000,130,0)
     game_world.add_object(wall,1)
@@ -54,7 +56,7 @@ def init():
 
     ch_text=text.Text()
     game_world.add_object(ch_text,2)
-    logo_start_time = get_time()
+
 
 def finish():
     game_world.clear()
@@ -63,15 +65,18 @@ def finish():
 def update():
     game_world.update()
     game_world.handle_collisions()
-    global logo_start_time
-    if get_time() - logo_start_time >= 5.0 and not boy.choice:
+    global logo_start_time,countdown,text_num
+    if get_time() - logo_start_time >= 5.0 and not desk.choice:
         ch_text = text.Text()
         game_world.add_object(ch_text, 2)
         logo_start_time=get_time()
+    elif server.mode=='play':
+        finish()
+        game_framework.change_mode(play_mode)
+
 
 def draw():
     clear_canvas()
     image.clip_draw(0,0,800,500,800,500,1600,1000)
-    arrow_image.clip_draw(0, 0, 1025, 1031, 180, 780, 90, 90)
     game_world.render()
     update_canvas()

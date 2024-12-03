@@ -9,6 +9,7 @@ import background
 import zombie
 import server
 import key
+import occupation_select_mode
 
 # Boy Run Speed
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
@@ -151,7 +152,6 @@ class Player:
     def attack(self):
         arrow= Arrow(self.x,self.y,self.dir)
         game_world.add_object(arrow,1)
-
         pass
 
     def handle_collision(self, group, other):
@@ -201,23 +201,25 @@ class job_desk:
 
     def handle_collision(self, group, other):
         if group == 'arrow:job_desk' and not self.choice:
+            self.choice = True
             job= job_chice()
             game_world.add_object(job,2)
-            pass
-        elif group == 'player:job_desk':
+            occupation_select_mode.countdown = get_time()
+            t = text(3)
+            game_world.add_object(t, 2)
             pass
         pass
 
 class job_chice:
-    def __init__(self, x1=100, y1=100.0, x2=200, y2=200.0):
+    def __init__(self):
         self.image=load_image('아처.png')
-        self.x1, self.x2, self.y1, self.y2 = x1, x2, y1, y2
         pass
 
     def update(self, val: float = 0.0):
         pass
 
     def draw(self):
+        self.image.clip_draw(0, 0, 1025, 1031, 180, 780, 90, 90)
         pass
 
     def get_bb(self):
@@ -229,6 +231,35 @@ class job_chice:
     def handle_collision(self, group, other):
         pass
 
+class text:
+    def __init__(self,num =3):
+        self.image = load_image(f'{num}.png')
+        self.count=0
+        self.num=num
+        self.b_choice =False
+
+    def update(self):
+        self.count+=1
+        if self.count==1050:
+            self.num-=1
+            game_world.remove_object(self)
+            if self.num >= 1:
+                t = text(self.num)
+                game_world.add_object(t, 2)
+            elif self.num ==0:
+                server.mode='play'
+        pass
+
+    def draw(self):
+        if self.count <= 1000:
+            self.image.clip_draw(0, 0, 100, 100,800, 800,200,200)
+        pass
+
+    def get_bb(self):
+        pass
+
+    def handle_collision(self, group, other):
+        pass
 
 class Wall:
     def __init__(self, x1=100, y1=100.0, x2=200, y2=200.0):

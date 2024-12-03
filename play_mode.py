@@ -51,10 +51,6 @@ def init():
     server.cover=Cover()
     game_world.add_object(server.cover,2)
 
-
-
-
-
 def finish():
     game_world.clear()
     pass

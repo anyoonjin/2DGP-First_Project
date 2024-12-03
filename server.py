@@ -9,4 +9,5 @@ key2=None
 key3=None
 cover=None
 escape_open=None
-mode='play'
+boy=None
+mode=None

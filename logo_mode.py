@@ -1,7 +1,6 @@
 from pico2d import load_image, get_time, clear_canvas, update_canvas, get_events
 
 import game_framework as game_framework
-import play_mode
 import server
 import occupation_select_mode
 import game_world
@@ -19,7 +18,7 @@ def init():
 def finish():
     global image
     del image
-    game_world.clear()
+    #game_world.clear()
 
 
 def update():
