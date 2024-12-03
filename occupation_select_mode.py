@@ -49,7 +49,8 @@ def init():
     desk = choice_mode_class.job_desk(740, 620, 825, 500)
     game_world.add_object(desk, 1)
     game_world.add_collision_pair('arrow:job_desk', desk, None)
-
+    game_world.add_collision_pair('player:job_desk', desk, None)
+    game_world.add_collision_pair('player:job_desk', None, boy)
 
     ch_text=text.Text()
     game_world.add_object(ch_text,2)
@@ -59,7 +60,6 @@ def finish():
     game_world.clear()
     pass
 
-
 def update():
     game_world.update()
     game_world.handle_collisions()
@@ -68,8 +68,6 @@ def update():
         ch_text = text.Text()
         game_world.add_object(ch_text, 2)
         logo_start_time=get_time()
-
-
 
 def draw():
     clear_canvas()

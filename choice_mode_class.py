@@ -165,6 +165,16 @@ class Player:
                 self.x += 1 * RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 3:
                 self.y += 1 * RUN_SPEED_PPS * game_framework.frame_time
+        elif group == 'player:job_desk':
+            if self.dir == 0:
+                self.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
+            elif self.dir == 1:
+                self.x -= 1 * RUN_SPEED_PPS * game_framework.frame_time
+            elif self.dir == 2:
+                self.x += 1 * RUN_SPEED_PPS * game_framework.frame_time
+            elif self.dir == 3:
+                self.y += 1 * RUN_SPEED_PPS * game_framework.frame_time
+            pass
 
 
 class job_desk:
@@ -193,6 +203,8 @@ class job_desk:
         if group == 'arrow:job_desk' and not self.choice:
             job= job_chice()
             game_world.add_object(job,2)
+            pass
+        elif group == 'player:job_desk':
             pass
         pass
 

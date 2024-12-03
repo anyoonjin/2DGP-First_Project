@@ -57,4 +57,4 @@ class Arrow:
     def handle_collision(self, group, other):
         if group =='arrow:job_desk':
             print("직업선택완료")
-            pass
+        pass
