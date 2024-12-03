@@ -35,9 +35,6 @@ def init():
     wall = choice_mode_class.Wall(1460, 1000, 1600, 0)
     game_world.add_object(wall, 1)
     ch_walls.append(wall)
-    wall = choice_mode_class.Wall(740, 620, 825, 500)
-    game_world.add_object(wall, 1)
-    ch_walls.append(wall)
     wall = choice_mode_class.Wall(0, 1000, 1600, 750)
     game_world.add_object(wall, 1)
     ch_walls.append(wall)
@@ -48,6 +45,11 @@ def init():
     game_world.add_collision_pair('player:wall', boy, None)
     for wall in ch_walls:
         game_world.add_collision_pair('player:wall', None, wall)
+
+    desk = choice_mode_class.job_desk(740, 620, 825, 500)
+    game_world.add_object(desk, 1)
+    game_world.add_collision_pair('arrow:job_desk', desk, None)
+
 
     ch_text=text.Text()
     game_world.add_object(ch_text,2)

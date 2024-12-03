@@ -10,6 +10,7 @@ class Arrow:
             Arrow.image=load_image('arrow.png')
             #print("Arrow.image is not loaded properly.")
         self.x,self.y,self.dir=x,y,dir
+        game_world.add_collision_pair('arrow:job_desk', None, self)
 
 
     def update(self):
@@ -54,5 +55,6 @@ class Arrow:
         pass
 
     def handle_collision(self, group, other):
-
-        pass
+        if group =='arrow:job_desk':
+            print("직업선택완료")
+            pass
