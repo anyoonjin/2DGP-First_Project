@@ -25,7 +25,6 @@ def update():
     if get_time() - logo_start_time >= 2.0:
         logo_start_time = get_time()
         game_framework.change_mode(occupation_select_mode)
-        server.mode='play'
 
 
 def draw():

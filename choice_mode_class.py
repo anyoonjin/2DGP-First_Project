@@ -83,7 +83,6 @@ class Run:
     # 상=0 / 우=1 / 좌=2 / 하=3
     @staticmethod
     def do(player):
-        bg_x1,bg_y1= server.b_g.check()
         player.frame = 3+(player.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) %3
         if player.dir==0:
             if player.y<=900 :
@@ -216,4 +215,28 @@ class job_chice:
         pass
 
     def handle_collision(self, group, other):
+        pass
+
+
+class Wall:
+    def __init__(self, x1=100, y1=100.0, x2=200, y2=200.0):
+        self.x1, self.x2, self.y1, self.y2 = x1, x2, y1, y2
+        pass
+    def update(self, val: float = 0.0):
+        # if (self.y1 > 20.0):
+        self.y1 += val
+        self.y2 += val
+        pass
+    def draw(self):
+        draw_rectangle(*self.get_bb())
+        pass
+    def get_bb(self):
+        return self.x1, self.y2, self.x2, self.y1
+        pass
+    def attack(self):
+        pass
+    def handle_collision(self, group, other):
+        if group == 'player:wall':
+            # print('------------------------------------------------------player:wall')
+            pass
         pass

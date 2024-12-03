@@ -5,7 +5,6 @@ import game_framework as game_framework
 import game_world
 import play_mode
 import choice_mode_class
-import player
 import text
 
 def handle_events():
@@ -26,23 +25,23 @@ def init():
     arrow_image=load_image('아처.png')
     #game_world.add_object(b_g_image, 0)
     global boy
-    boy=player.Player(800,400,170)
+    boy=choice_mode_class.Player(800,400,170)
     game_world.add_object(boy,1)
 
     walls=[]
-    wall=object_wall.Wall(0,1000,130,0)
+    wall=choice_mode_class.Wall(0,1000,130,0)
     game_world.add_object(wall,1)
     walls.append(wall)
-    wall = object_wall.Wall(1460, 1000, 1600, 0)
+    wall = choice_mode_class.Wall(1460, 1000, 1600, 0)
     game_world.add_object(wall, 1)
     walls.append(wall)
-    wall = object_wall.Wall(740, 620, 825, 500)
+    wall = choice_mode_class.Wall(740, 620, 825, 500)
     game_world.add_object(wall, 1)
     walls.append(wall)
-    wall = object_wall.Wall(0, 1000, 1600, 750)
+    wall = choice_mode_class.Wall(0, 1000, 1600, 750)
     game_world.add_object(wall, 1)
     walls.append(wall)
-    wall = object_wall.Wall(1300, 1000, 1600, 690)
+    wall = choice_mode_class.Wall(1300, 1000, 1600, 690)
     game_world.add_object(wall, 1)
     walls.append(wall)
 
