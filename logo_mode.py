@@ -4,6 +4,7 @@ import game_framework as game_framework
 import play_mode
 import server
 import occupation_select_mode
+import game_world
 
 def handle_events():
     event = get_events()
@@ -18,6 +19,7 @@ def init():
 def finish():
     global image
     del image
+    game_world.clear()
 
 
 def update():

@@ -28,25 +28,25 @@ def init():
     boy=choice_mode_class.Player(800,400,170)
     game_world.add_object(boy,1)
 
-    walls=[]
+    ch_walls=[]
     wall=choice_mode_class.Wall(0,1000,130,0)
     game_world.add_object(wall,1)
-    walls.append(wall)
+    ch_walls.append(wall)
     wall = choice_mode_class.Wall(1460, 1000, 1600, 0)
     game_world.add_object(wall, 1)
-    walls.append(wall)
+    ch_walls.append(wall)
     wall = choice_mode_class.Wall(740, 620, 825, 500)
     game_world.add_object(wall, 1)
-    walls.append(wall)
+    ch_walls.append(wall)
     wall = choice_mode_class.Wall(0, 1000, 1600, 750)
     game_world.add_object(wall, 1)
-    walls.append(wall)
+    ch_walls.append(wall)
     wall = choice_mode_class.Wall(1300, 1000, 1600, 690)
     game_world.add_object(wall, 1)
-    walls.append(wall)
+    ch_walls.append(wall)
 
     game_world.add_collision_pair('player:wall', boy, None)
-    for wall in walls:
+    for wall in ch_walls:
         game_world.add_collision_pair('player:wall', None, wall)
 
     ch_text=text.Text()
