@@ -4,8 +4,7 @@ from pygame import get_error
 import game_framework as game_framework
 import game_world
 import play_mode
-import server
-import object_wall
+import choice_mode_class
 import player
 import text
 
