@@ -7,6 +7,7 @@ import play_mode
 import choice_mode_class
 import server
 import text
+import logo_mode
 
 def handle_events():
     events = get_events()
@@ -72,7 +73,7 @@ def update():
         logo_start_time=get_time()
     elif server.mode=='play':
         finish()
-        game_framework.change_mode(play_mode)
+        game_framework.change_mode(logo_mode)
 
 
 def draw():

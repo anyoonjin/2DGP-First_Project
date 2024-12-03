@@ -31,8 +31,8 @@ class Wall:
         pass
 
 
+server.walls=[]
 if server.mode=='play':
-    server.walls=[]
     #아래교실
     wall=Wall(1100,685,1190,115)    #시작시 바로 오른쪽에 있는 벽
     game_world.add_object(wall, 1)

@@ -4,6 +4,7 @@ import game_framework as game_framework
 import server
 import occupation_select_mode
 import game_world
+import play_mode
 
 def handle_events():
     event = get_events()
@@ -25,7 +26,10 @@ def update():
     global logo_start_time
     if get_time() - logo_start_time >= 2.0:
         logo_start_time = get_time()
-        game_framework.change_mode(occupation_select_mode)
+        if server.mode=='play':
+            game_framework.change_mode(play_mode)
+        else:
+            game_framework.change_mode(occupation_select_mode)
 
 
 def draw():
