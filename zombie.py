@@ -29,13 +29,15 @@ class Zombie:
         self.image = load_image('zombie.png')
         self.dir = random.randint(0, 3)
         self.face_dir = self.dir
-        self.speed = 0.0
+        self.speed = random.uniform(0.0,2.0)
         self.frame = 0
         self.state = 'Idle'
         self.build_behavior_tree()
         self.wander_num=random.randint(0,3)     # 배회할 때\
         self.tx,self.ty=self.x,self.y
         self.set_random_location()
+        game_world.add_collision_pair('player:zombie',None,self)
+        game_world.add_collision_pair('arrow:zombie', None, self)
 
     def get_bb(self):
         if self.face_dir==3 or self.face_dir ==2:
@@ -146,6 +148,15 @@ class Zombie:
 
 
 Zombies=[]
+P1_zom=[]
+def make_zombie():
+    pass
+def set_phase1():
+    for i in range(5):
+        zom=Zombie(random.randint(1,3)*100+1200,random.randint(-5,10)*100+300)
+        P1_zom.append(zom)
+
+    pass
 def remove_zombie(o):
     if o in Zombies:
         Zombies.remove(o)

@@ -5,6 +5,7 @@ from pygame.gfxdraw import rectangle
 import game_world
 import game_framework
 import server
+import zombie
 
 
 class Key:
@@ -32,6 +33,9 @@ class Key:
 
     def handle_collision(self, group, other):
         if group == 'player:key' and not self.check_key :
+            for i in zombie.P1_zom:
+                game_world.add_object(i,1)
+
             game_world.remove_object(self)
             server.player.key_count += 1
             server.start_time = get_time()
