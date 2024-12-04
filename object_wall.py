@@ -42,6 +42,7 @@ def wall_make():
         game_world.add_object(wall, 1)
         server.walls.append(wall)
         wall=Wall(0,-150,1035,-300)    #맨 밑 사물함 모임
+
         game_world.add_object(wall, 1)
         server.walls.append(wall)
         wall=Wall(1100,1680,1190,800)    #윗문벽

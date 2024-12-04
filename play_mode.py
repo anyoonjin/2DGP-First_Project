@@ -33,25 +33,29 @@ def init():
     third_key = False
     server.start_time = get_time()
     if server.mode =='play':
-        object_wall.wall_make()
+
         server.key1 = key.Key()
         server.key2 = key.Key(120, 2020)
         server.key3 = key.Key(500,2020)
         server.escape_open=key.Escape()
+
         zombie.set_phase1()
+        zombie.Zombies+=zombie.P1_zom
+        zom=zombie.Zombie(300,800)
+        game_world.add_object(zom,1)
+        zombie.Zombies.append(zom)
+
         server.b_g=Background()
         game_world.add_object(server.b_g,0)
 
         server.player=Player()
         game_world.add_object(server.player,1)
 
+        object_wall.wall_make()
         game_world.add_collision_pair('player:wall',server.player,None)
         for wall in server.walls:
             game_world.add_collision_pair('player:wall',None,wall)
 
-        zom=zombie.Zombie(300,800)
-        game_world.add_object(zom,1)
-        zombie.Zombies.append(zom)
         game_world.add_collision_pair('player:zombie', server.player, None)
         #game_world.add_collision_pair('player:zombie', None,zom)
         #game_world.add_collision_pair('arrow:zombie', None, zom)

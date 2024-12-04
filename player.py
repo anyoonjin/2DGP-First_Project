@@ -179,7 +179,8 @@ class Player:
             pass
 
         elif group =='player:zombie':
-            close_canvas()
+            #close_canvas()
+            print('죽었다ㅜㅜㅜㅜㅜㅜㅜㅜ')
 
         elif group =='player:wall':
             print('----------------------------player:wall')

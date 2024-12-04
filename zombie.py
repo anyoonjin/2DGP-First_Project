@@ -64,8 +64,8 @@ class Zombie:
 
     def handle_collision(self, group, other):
         if group == 'arrow:zombie':
-            game_world.remove_object(self)
             remove_zombie(self)
+            game_world.remove_object(self)
         elif group == 'player:zombie':
             #close_canvas()
             pass
