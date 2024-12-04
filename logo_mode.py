@@ -19,7 +19,9 @@ def init():
 def finish():
     global image
     del image
-    #game_world.clear()
+    game_world.clear()
+    server.player = None
+    server.walls = []
 
 
 def update():

@@ -2,7 +2,7 @@ from xml.sax.saxutils import escape
 
 player = None
 b_g = None
-walls =None
+walls =[]
 start_time=None
 key1=None
 key2=None

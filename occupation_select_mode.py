@@ -62,6 +62,7 @@ def init():
 def finish():
     game_world.clear()
     server.boy = None
+    game_world.collision_pairs = {}
     pass
 
 def update():

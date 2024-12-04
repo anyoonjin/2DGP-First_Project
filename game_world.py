@@ -50,7 +50,6 @@ def clear():
         layer.clear()
 
 
-
 def collide(a, b):
     al,ab,ar,at=a.get_bb()
     bl,bb,br,bt=b.get_bb()

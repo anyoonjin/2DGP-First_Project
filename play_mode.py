@@ -25,14 +25,13 @@ def update_Wall(val):
     for wall in server.walls:
         wall.update(val)
 
-
-first_key = False
-second_key = False
-third_key = False
-
 def init():
+    global first_key, second_key, third_key
+    first_key = False
+    second_key = False
+    third_key = False
+    server.start_time = get_time()
     if server.mode =='play':
-        server.start_time = get_time()
         object_wall.wall_make()
         server.key1 = key.Key()
         server.key2 = key.Key(120, 2020)
@@ -54,9 +53,10 @@ def init():
 
 def finish():
     game_world.clear()
+    game_world.collision_pairs={}
     server.player = None
     server.b_g = None
-    server.walls = None
+    server.walls = []
     server.start_time = None
     server.key1 = None
     server.key2 = None
