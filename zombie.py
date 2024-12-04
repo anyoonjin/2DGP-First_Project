@@ -2,6 +2,9 @@ from pico2d import *
 import game_world
 import game_framework
 
+import math
+import random
+
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
 RUN_SPEED_KMPH = 10.0  # Km / Hour
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
@@ -33,19 +36,17 @@ self.image=load_image('player2.png')
             }
         )
 '''
-#하상좌    우=0
+#하=3      상=2     좌=1    우=0
 class Zombie:
     image = None
-
     def __init__(self, x=None, y=None):
         self.x = x if x else random.randint(100, 1180)
         self.y = y if y else random.randint(100, 924)
         self.image=load_image('zombie.png')
-        self.dir = 0.0  # radian 값으로 방향을 표시
+        self.dir = random.randint(0, 3)
         self.speed = 0.0
-        self.frame = random.randint(0, 9)
+        self.frame = 0
         self.state = 'Idle'
-        self.ball_count = 0
         self.tx, self.ty = 0, 0
 
         self.build_behavior_tree()
@@ -71,8 +72,10 @@ class Zombie:
         pass
 
     def handle_collision(self, group, other):
-        if group == 'zombie:ball':
-            self.ball_count += 1
+        if group == 'arrow:zombie':
+            game_world.remove_object(self)
+        elif group == 'player:zombie':
+            close_canvas()
 
     def set_target_location(self, x=None, y=None):
         if not x or not y:
