@@ -94,6 +94,8 @@ class Run:
                 for k in [server.key1, server.key2, server.key3,server.escape_open]:
                     if k is not None:
                         k.update(-0.63)
+                for zom in zombie.Zombies:
+                    zom.update(-0.63)
             elif player.y<=900 :
                 player.y += 1* RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==1:
@@ -109,6 +111,8 @@ class Run:
                 for k in [server.key1, server.key2, server.key3,server.escape_open]:
                     if k is not None:
                         k.update(0.63)
+                for zom in zombie.Zombies:
+                    zom.update(0.63)
                #play_mode.b_g.check()
             elif player.y>=80 :
                 player.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time

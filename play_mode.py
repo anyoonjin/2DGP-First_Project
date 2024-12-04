@@ -51,6 +51,7 @@ def init():
 
         zom=zombie.Zombie(300,800)
         game_world.add_object(zom,1)
+        zombie.Zombies.append(zom)
         game_world.add_collision_pair('player:zombie', server.player, None)
         game_world.add_collision_pair('player:zombie', None,zom)
         game_world.add_collision_pair('arrow:zombie', None, zom)
