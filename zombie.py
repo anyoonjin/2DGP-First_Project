@@ -9,7 +9,7 @@ from behavior_tree import BehaviorTree, Action, Sequence, Condition, Selector
 import server
 
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
-RUN_SPEED_KMPH = 8.0  # Km / Hour
+RUN_SPEED_KMPH = 9.0  # Km / Hour
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -34,7 +34,7 @@ class Zombie:
         self.state = 'Idle'
         self.build_behavior_tree()
         self.wander_num=random.randint(0,3)     # 배회할 때\
-        self.tx,self.ty=0,0
+        self.tx,self.ty=self.x,self.y
         self.set_random_location()
 
     def get_bb(self):
@@ -45,8 +45,13 @@ class Zombie:
 
     def update(self,val=0):
         self.y+=val
+        self.ty+=val
         self.frame = (self.frame + 4 * ACTION_PER_TIME * game_framework.frame_time) % 4
         self.bt.run()
+        if self.x<130 :
+            self.x+=10
+        elif self.x>=1500:
+            self.x-=10
 
     def draw(self):
         self.image.clip_draw(int(self.frame) * 100, int(self.face_dir) * 100, 100, 100, self.x, self.y, 150, 150)
