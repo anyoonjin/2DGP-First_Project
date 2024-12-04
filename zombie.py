@@ -57,6 +57,7 @@ class Zombie:
     def handle_collision(self, group, other):
         if group == 'arrow:zombie':
             game_world.remove_object(self)
+            remove_zombie(self)
         elif group == 'player:zombie':
             close_canvas()
 
@@ -154,3 +155,10 @@ class Zombie:
 
         # 행동 트리 루트 설정
         self.bt = BehaviorTree(root)
+
+Zombies=[]
+def remove_zombie(o):
+    for layer in Zombies:
+        if o in layer:
+            layer.remove(o)
+            return
