@@ -49,7 +49,7 @@ def init():
         for wall in server.walls:
             game_world.add_collision_pair('player:wall',None,wall)
 
-        zom=zombie.Zombie(500,800)
+        zom=zombie.Zombie(300,800)
         game_world.add_object(zom,1)
         game_world.add_collision_pair('player:zombie', server.player, None)
         game_world.add_collision_pair('player:zombie', None,zom)
