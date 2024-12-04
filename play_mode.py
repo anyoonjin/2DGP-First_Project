@@ -33,6 +33,7 @@ second_key = False
 third_key = False
 
 def init():
+    object_wall.wall_make()
     server.key1 = key.Key()
     server.key2 = key.Key(120, 2020)
     server.key3 = key.Key(500,2020)
