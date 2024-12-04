@@ -67,7 +67,8 @@ class Zombie:
             game_world.remove_object(self)
             remove_zombie(self)
         elif group == 'player:zombie':
-            close_canvas()
+            #close_canvas()
+            pass
 
     def distance_less_than(self, x1, y1, x2, y2, r):
         distance2 = (x1 - x2) ** 2 + (y1 - y2) ** 2
