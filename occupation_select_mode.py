@@ -61,6 +61,7 @@ def init():
 
 def finish():
     game_world.clear()
+    server.boy = None
     pass
 
 def update():

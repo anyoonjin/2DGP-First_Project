@@ -240,7 +240,7 @@ class text:
 
     def update(self):
         self.count+=1
-        if self.count==1050:
+        if self.count==850:
             self.num-=1
             game_world.remove_object(self)
             if self.num >= 1:
@@ -251,7 +251,7 @@ class text:
         pass
 
     def draw(self):
-        if self.count <= 1000:
+        if self.count <= 800:
             self.image.clip_draw(0, 0, 100, 100,800, 800,200,200)
         pass
 
