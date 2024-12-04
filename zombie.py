@@ -100,32 +100,16 @@ class Zombie:
 
     def set_random_location(self):
         if self.wander_num == 0:  # 오른쪽
-            while True:
-                rand_value = random.randint(0, 100)
-                if self.x + rand_value <= 1450:
-                    self.tx = self.x + rand_value
-                    break  # 조건을 만족하면 루프 종료
+            self.tx = self.x + 100
             self.wander_num=1
         elif self.wander_num == 1:  # 왼쪽
-            while True:
-                rand_value = random.randint(0, 100)
-                if self.x - rand_value >= 150:
-                    self.tx = self.x - rand_value
-                    break  # 조건을 만족하면 루프 종료
+            self.tx = self.x - 100
             self.wander_num = 0
         elif self.wander_num == 2:  # 위쪽
-            while True:
-                rand_value = random.randint(0, 100)
-                if self.y + rand_value <= 850:  # y가 700을 넘지 않도록 설정 (최대값은 화면 크기에 따라 조정)
-                    self.ty = self.y + rand_value
-                    break  # 조건을 만족하면 루프 종료
+            self.ty = self.y + 100
             self.wander_num = 3
         elif self.wander_num == 3:  # 아래쪽
-            while True:
-                rand_value = random.randint(0, 100)
-                if self.y - rand_value >= 150:  # y가 100보다 작은 값이 되지 않도록 설정
-                    self.ty = self.y - rand_value
-                    break  # 조건을 만족하면 루프 종료
+            self.ty = self.y - 100
             self.wander_num=2
         return BehaviorTree.SUCCESS
 
@@ -140,11 +124,9 @@ class Zombie:
         pass
 
     def build_behavior_tree(self,r=10):
-        a1 = Action('Set random location', self.set_random_location)
         a2 = Action('Move to', self.move_to)
-
-        # 'Wander' 배회 행동 (랜덤 위치 설정 후 이동)
-        wander = Sequence('Wander', a1, a2)
+        a3 = Action('Set random location', self.set_random_location)
+        root = wander = Sequence('Wander', a3, a2)
 
         c1 = Condition('소년이 근처에 있는가?', self.is_boy_nearby, r)  # 9미터로 설정
 
@@ -152,14 +134,14 @@ class Zombie:
         a4 = Action('소년한테 접근', self.move_to_boy)
         chase_boy = Sequence('소년을 추적', c1, a4)
 
-        root=chase_or_wander = Selector('추적 또는 배회', chase_boy, wander)
+        root = chase_or_wander = Selector('추적 또는 배회', chase_boy, wander)
 
         # 행동 트리 루트 설정
         self.bt = BehaviorTree(root)
 
+
 Zombies=[]
 def remove_zombie(o):
-    for layer in Zombies:
-        if o in layer:
-            layer.remove(o)
-            return
+    if o in Zombies:
+        Zombies.remove(o)
+        return
