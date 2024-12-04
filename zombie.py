@@ -9,7 +9,7 @@ from behavior_tree import BehaviorTree, Action, Sequence, Condition, Selector
 import server
 
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
-RUN_SPEED_KMPH = 6.0  # Km / Hour
+RUN_SPEED_KMPH = 8.0  # Km / Hour
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -38,7 +38,10 @@ class Zombie:
         self.set_random_location()
 
     def get_bb(self):
-        return self.x - 50, self.y - 50, self.x + 50, self.y + 50
+        if self.face_dir==3 or self.face_dir ==2:
+            return self.x - 48, self.y - 50, self.x + 48, self.y + 50
+        else:
+            return self.x - 20, self.y - 50, self.x + 20, self.y + 50
 
     def update(self):
         self.frame = (self.frame + 4 * ACTION_PER_TIME * game_framework.frame_time) % 4
@@ -79,6 +82,8 @@ class Zombie:
 
     def is_boy_nearby(self, r):
         if self.distance_less_than(server.player.x, server.player.y, self.x, self.y, r):
+            self.build_behavior_tree(300)
+            print("소년 발견!")
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
@@ -95,28 +100,28 @@ class Zombie:
         if self.wander_num == 0:  # 오른쪽
             while True:
                 rand_value = random.randint(0, 100)
-                if self.x + rand_value <= 1600:
+                if self.x + rand_value <= 1450:
                     self.tx = self.x + rand_value
                     break  # 조건을 만족하면 루프 종료
             self.wander_num=1
         elif self.wander_num == 1:  # 왼쪽
             while True:
                 rand_value = random.randint(0, 100)
-                if self.x - rand_value >= 100:
+                if self.x - rand_value >= 150:
                     self.tx = self.x - rand_value
                     break  # 조건을 만족하면 루프 종료
             self.wander_num = 0
         elif self.wander_num == 2:  # 위쪽
             while True:
                 rand_value = random.randint(0, 100)
-                if self.y + rand_value <= 900:  # y가 700을 넘지 않도록 설정 (최대값은 화면 크기에 따라 조정)
+                if self.y + rand_value <= 850:  # y가 700을 넘지 않도록 설정 (최대값은 화면 크기에 따라 조정)
                     self.ty = self.y + rand_value
                     break  # 조건을 만족하면 루프 종료
             self.wander_num = 3
         elif self.wander_num == 3:  # 아래쪽
             while True:
                 rand_value = random.randint(0, 100)
-                if self.y - rand_value >= 100:  # y가 100보다 작은 값이 되지 않도록 설정
+                if self.y - rand_value >= 150:  # y가 100보다 작은 값이 되지 않도록 설정
                     self.ty = self.y - rand_value
                     break  # 조건을 만족하면 루프 종료
             self.wander_num=2
@@ -132,24 +137,20 @@ class Zombie:
             return BehaviorTree.RUNNING
         pass
 
-    def build_behavior_tree(self):
-
-        # 'Set random location' 행동 (배회할 랜덤 위치 설정)
+    def build_behavior_tree(self,r=10):
         a1 = Action('Set random location', self.set_random_location)
         a2 = Action('Move to', self.move_to)
 
         # 'Wander' 배회 행동 (랜덤 위치 설정 후 이동)
-        root= wander = Sequence('Wander', a1, a2)
+        wander = Sequence('Wander', a1, a2)
 
-        # 'Is boy nearby?' - 플레이어가 근처에 있는지 확인하는 조건
-        c1 = Condition('소년이 근처에 있는가?', self.is_boy_nearby, 7)  # 7미터
+        c1 = Condition('소년이 근처에 있는가?', self.is_boy_nearby, r)  # 9미터로 설정
 
         # 'Move to boy' 행동 (플레이어에게 접근)
         a4 = Action('소년한테 접근', self.move_to_boy)
-        root= chase_boy = Sequence('소년을 추적', c1, a4)
+        chase_boy = Sequence('소년을 추적', c1, a4)
 
-        # '추적 또는 배회' - 추적 또는 배회를 결정하는 셀렉터
-        root = chase_or_wander = Selector('추적 또는 배회', chase_boy, wander)
+        root=chase_or_wander = Selector('추적 또는 배회', chase_boy, wander)
 
         # 행동 트리 루트 설정
         self.bt = BehaviorTree(root)
