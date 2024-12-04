@@ -212,7 +212,7 @@ class job_desk:
 
 class job_chice:
     def __init__(self):
-        self.image=load_image('아처.png')
+        self.image=load_image('arrow_title.png')
         pass
 
     def update(self, val: float = 0.0):
