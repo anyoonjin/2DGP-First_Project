@@ -11,6 +11,7 @@ class Arrow:
             #print("Arrow.image is not loaded properly.")
         self.x,self.y,self.dir=x,y,dir
         game_world.add_collision_pair('arrow:job_desk', None, self)
+        game_world.add_collision_pair('arrow:zombie', self, None)
 
 
     def update(self):

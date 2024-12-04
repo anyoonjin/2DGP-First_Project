@@ -10,6 +10,7 @@ from Weapon import Arrow
 import server
 import object_wall
 import key
+import zombie
 
 def handle_events():
     events=get_events()
@@ -47,6 +48,12 @@ def init():
         game_world.add_collision_pair('player:wall',server.player,None)
         for wall in server.walls:
             game_world.add_collision_pair('player:wall',None,wall)
+
+        zom=zombie.Zombie(500,800)
+        game_world.add_object(zom,1)
+        game_world.add_collision_pair('player:zombie', server.player, None)
+        game_world.add_collision_pair('player:zombie', None,zom)
+        game_world.add_collision_pair('arrow:zombie', None, zom)
 
         server.cover=Cover()
         game_world.add_object(server.cover,2)
