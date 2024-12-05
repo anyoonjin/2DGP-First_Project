@@ -50,8 +50,7 @@ class Idle:
 
     @staticmethod
     def exit(player, e):
-        print(f"뭔놈의 event: {e}")
-        print(f"x={player.x}  y={player.y}")
+        #print(f"뭔놈의 event: {e}")
         if space_down(e):
             player.attack()
 
@@ -68,7 +67,7 @@ def game_word_total_y(val=0.63):
     for i in range(1,3):
         for obj in game_world.world[i]:
             if obj is not server.player:
-                print(f'{obj}')
+                #print(f'{obj}')
                 obj.update(val)
 
 # 상=0 / 우=1 / 좌=2 / 하=3
@@ -99,42 +98,26 @@ class Run:
         if player.dir==0:
             if bg_y1<=1400 and player.y>=500:
                 server.b_g.update(0.5)
-                '''
-                play_mode.update_Wall(-0.63)
-                for k in [server.key1, server.key2, server.key3,server.escape_open]:
-                    if k is not None:
-                        k.update(-0.63)
-                for zom in zombie.Zombies:
-                    zom.update(-0.63)
-                '''
                 game_word_total_y(-0.63)
 
             elif player.y<=900 :
-                player.y += 1* server.RUN_SPEED_PPS * game_framework.frame_time
+                player.y += 4* server.RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==1:
             if player.x <=1520:
-                player.x += 1 * server.RUN_SPEED_PPS * game_framework.frame_time
+                player.x += 5 * server.RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==2:
             if player.x>=105:
-                player.x -= 1 * server.RUN_SPEED_PPS * game_framework.frame_time
+                player.x -= 5 * server.RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==3:
             if  bg_y1>20 and player.y<=600 :    #밑으로 내려갈 배경이 남았을 때/ 남지않았으면 50
                 server.b_g.update(-0.5)
-                '''
-                play_mode.update_Wall(0.63)
-                for k in [server.key1, server.key2, server.key3,server.escape_open]:
-                    if k is not None:
-                        k.update(0.63)
-                for zom in zombie.Zombies:
-                    zom.update(0.63)
-                '''
                 game_word_total_y(0.63)
                #play_mode.b_g.check()
             elif player.y>=80 :
-                player.y -= 1 * server.RUN_SPEED_PPS * game_framework.frame_time
+                player.y -= 4 * server.RUN_SPEED_PPS * game_framework.frame_time
 
                 #print(f'~~~~~~~~~~ BG Y:{player.b_g.y1}')
-
+        print(f"x={player.x}  y={player.y}")
         pass
 
     @staticmethod
@@ -202,13 +185,13 @@ class Player:
         elif group =='player:wall':
             print('----------------------------player:wall')
             if self.dir == 0:
-                self.y -= 1 * server.RUN_SPEED_PPS * game_framework.frame_time
+                self.y -= 4 * server.RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 1:
-                self.x -= 1 * server.RUN_SPEED_PPS * game_framework.frame_time
+                self.x -= 5 * server.RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 2:
-                self.x += 1 * server.RUN_SPEED_PPS * game_framework.frame_time
+                self.x += 5 * server.RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 3:
-                self.y += 1 * server.RUN_SPEED_PPS * game_framework.frame_time
+                self.y += 4 * server.RUN_SPEED_PPS * game_framework.frame_time
 
         elif group =='player:escape':
             self.success=True
