@@ -17,6 +17,8 @@ class Key:
         self.x,self.y=x,y
         self.check_key=False
         self.key_draw=False
+        self.sound=load_wav('key_sound.wav')
+        self.sound.set_volume(50)
 
     def update(self, val: float = 0.0):
         # if (self.y1 > 20.0):
@@ -39,7 +41,7 @@ class Key:
                 zombie.set_phase1()
                 for i in zombie.P1_zom:
                     i.yes_draw=True
-
+                self.sound.play(1)
                 game_world.remove_object(self)
                 server.player.key_count += 1
                 server.start_time = get_time()

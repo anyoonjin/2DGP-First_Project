@@ -146,7 +146,7 @@ class Player:
         )
 
         self.sound=load_wav('skill.wav')
-        self.sound.set_volume(128)
+        self.sound.get_volume()
 
         pass
 
