@@ -145,6 +145,9 @@ class Player:
             }
         )
 
+        self.sound=load_wav('skill.wav')
+        self.sound.set_volume(128)
+
         pass
 
     def update(self):
@@ -168,6 +171,7 @@ class Player:
     def attack(self):
         arrow= Arrow(self.x,self.y,self.dir)
         game_world.add_object(arrow,1)
+        self.sound.play(1)
 
         pass
 

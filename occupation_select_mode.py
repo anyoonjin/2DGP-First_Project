@@ -9,6 +9,8 @@ import server
 import text
 import logo_mode
 
+
+
 def handle_events():
     events = get_events()
     for event in events:

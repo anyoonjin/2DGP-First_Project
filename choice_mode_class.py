@@ -10,6 +10,7 @@ import zombie
 import server
 import key
 import occupation_select_mode
+import os
 
 # Boy Run Speed
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
@@ -129,6 +130,8 @@ class Player:
             }
         )
 
+        self.sound=load_wav('skill.wav')
+        self.sound.set_volume(128)
         pass
 
     def update(self):
@@ -152,6 +155,7 @@ class Player:
     def attack(self):
         arrow= Arrow(self.x,self.y,self.dir)
         game_world.add_object(arrow,1)
+        self.sound.play(1)
         pass
 
     def handle_collision(self, group, other):
