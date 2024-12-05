@@ -177,7 +177,7 @@ class Player:
 
         elif group =='player:zombie':
             #close_canvas()
-            print('죽었다ㅜㅜㅜㅜㅜㅜㅜㅜ')
+            server.mode='fail'
 
         elif group =='player:wall':
             print('----------------------------player:wall')
@@ -192,5 +192,6 @@ class Player:
 
         elif group =='player:escape':
             self.success=True
+            server.mode='clear'
             print("탈출성공!!!!")
 

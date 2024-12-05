@@ -10,6 +10,7 @@ import object_wall
 import key
 import zombie
 import random
+import result
 
 def key_point_set():
     key_point_l=[(1050,2190),(200,2200),(400,1300),(1450,2400),(1080,-150),(120,860),(120,200),(120,2020)]
@@ -123,10 +124,11 @@ def update():
 
     game_world.update()
     game_world.handle_collisions()
-    if server.player.success:
-       finish()
-       game_framework.change_mode(logo_mode)
-       server.mode='logo'
+    if server.player.success or server.mode=='fail':
+        delay(3)
+        finish()
+        game_framework.change_mode(result)
+
 
 def draw():
     clear_canvas()
