@@ -21,6 +21,10 @@ def handle_events():
 def init():
     global image
     global logo_start_time
+    global bgm
+    bgm=load_music('re_bgm.mp3')
+    bgm.set_volume(50)
+    bgm.repeat_play()
     if server.mode=='fail':
         image = load_image('Fail.png')
     else:

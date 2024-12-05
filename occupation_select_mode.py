@@ -26,6 +26,10 @@ def init():
     global image,arrow_image,countdown
     global logo_start_time, desk
     global text_num
+    global bgm
+    bgm=load_music('ch_bgm.mp3')
+    bgm.set_volume(30)
+    bgm.repeat_play()
     text_num=3
     image = load_image('occupation selection.png')
     #game_world.add_object(b_g_image, 0)

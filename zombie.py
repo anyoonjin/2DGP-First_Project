@@ -41,7 +41,7 @@ class Zombie:
         self.yes_draw=yes
 
         self.sound=load_wav('hit.wav')
-        self.sound.set_volume(34)
+        self.sound.set_volume(50)
 
     def get_bb(self):
         if self.face_dir==3 or self.face_dir ==2:
