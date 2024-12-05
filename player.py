@@ -9,7 +9,7 @@ import background
 import zombie
 import server
 import key
-
+'''
 # Boy Run Speed
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
 RUN_SPEED_KMPH = 20.0  # Km / Hour
@@ -21,6 +21,8 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 TIME_PER_ACTION = 0.8
 ACTION_PER_TIME = 2.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 4
+
+'''
 
 #상하 키 누르다가 좌우 키 동시에 누르면 눌린키와 반대방향으로 이동함
 # 상=0 / 우=1 / 좌=2 / 하=3
@@ -55,12 +57,12 @@ class Idle:
 
     @staticmethod
     def do(player):
-        player.frame = (player.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
+        player.frame = (player.frame + 4 * server.ACTION_PER_TIME * game_framework.frame_time) % 4
         pass
 
     @staticmethod
     def draw(player):
-        player.image.clip_draw(int(player.frame )* 75,int(player.action)* 75, 75, 75, int(player.x),int( player.y),player.size,player.size)
+        player.image2.clip_draw(int(player.frame )* 75,int(player.action)* 75, 75, 75, int(player.x),int( player.y),player.size,player.size)
 
 def game_word_total_y(val=0.63):
     for i in range(1,3):
@@ -93,7 +95,7 @@ class Run:
     @staticmethod
     def do(player):
         bg_x1,bg_y1= server.b_g.check()
-        player.frame = 3+(player.frame + FRAMES_PER_ACTION*ACTION_PER_TIME*game_framework.frame_time) %3
+        player.frame =(player.frame + 4 * server.ACTION_PER_TIME*game_framework.frame_time) %4
         if player.dir==0:
             if bg_y1<=1400 and player.y>=500:
                 server.b_g.update(0.5)
@@ -108,13 +110,13 @@ class Run:
                 game_word_total_y(-0.63)
 
             elif player.y<=900 :
-                player.y += 1* RUN_SPEED_PPS * game_framework.frame_time
+                player.y += 1* server.RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==1:
             if player.x <=1520:
-                player.x += 1 * RUN_SPEED_PPS * game_framework.frame_time
+                player.x += 1 * server.RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==2:
             if player.x>=105:
-                player.x -= 1 * RUN_SPEED_PPS * game_framework.frame_time
+                player.x -= 1 * server.RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==3:
             if  bg_y1>20 and player.y<=600 :    #밑으로 내려갈 배경이 남았을 때/ 남지않았으면 50
                 server.b_g.update(-0.5)
@@ -129,7 +131,7 @@ class Run:
                 game_word_total_y(0.63)
                #play_mode.b_g.check()
             elif player.y>=80 :
-                player.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
+                player.y -= 1 * server.RUN_SPEED_PPS * game_framework.frame_time
 
                 #print(f'~~~~~~~~~~ BG Y:{player.b_g.y1}')
 
@@ -137,13 +139,14 @@ class Run:
 
     @staticmethod
     def draw(player):
-        player.image.clip_draw(int(player.frame) * 75, int(player.action)* 75, 75, 75, int(player.x), int(player.y),player.size,player.size)
+        player.image1.clip_draw(int(player.frame) * 75, int(player.action)* 75, 75, 75, int(player.x), int(player.y),player.size,player.size)
 
 
 # 상=0 / 우=1 / 좌=2 / 하=3
 class Player:
     def __init__(self,x=800,y=500, size=120):
-        self.image=load_image('player2.png')
+        self.image1=load_image('player.png')
+        self.image2=load_image('player2.png')
         self.x,self.y=x,y
         self.face_dir=3
         self.dir=3
@@ -199,13 +202,13 @@ class Player:
         elif group =='player:wall':
             print('----------------------------player:wall')
             if self.dir == 0:
-                self.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time
+                self.y -= 1 * server.RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 1:
-                self.x -= 1 * RUN_SPEED_PPS * game_framework.frame_time
+                self.x -= 1 * server.RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 2:
-                self.x += 1 * RUN_SPEED_PPS * game_framework.frame_time
+                self.x += 1 * server.RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 3:
-                self.y += 1 * RUN_SPEED_PPS * game_framework.frame_time
+                self.y += 1 * server.RUN_SPEED_PPS * game_framework.frame_time
 
         elif group =='player:escape':
             self.success=True
