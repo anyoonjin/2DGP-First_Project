@@ -40,6 +40,9 @@ class Zombie:
         game_world.add_collision_pair('arrow:zombie', None, self)
         self.yes_draw=yes
 
+        self.sound=load_wav('hit.wav')
+        self.sound.set_volume(34)
+
     def get_bb(self):
         if self.face_dir==3 or self.face_dir ==2:
             return self.x - 48, self.y - 50, self.x + 48, self.y + 50
@@ -68,6 +71,7 @@ class Zombie:
         if self.yes_draw:
             if group == 'arrow:zombie':
                 game_world.remove_object(self)
+                self.sound.play(1)
             elif group == 'player:zombie':
                 pass
 

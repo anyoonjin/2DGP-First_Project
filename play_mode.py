@@ -42,6 +42,10 @@ def handle_events():
             server.player.handle_event(event)
 
 def init():
+    global bgm
+    bgm=load_music('bgm.mp3')
+    bgm.set_volume(50)
+    bgm.repeat_play()
     global first_key, second_key, third_key
     first_key = False
     second_key = False
