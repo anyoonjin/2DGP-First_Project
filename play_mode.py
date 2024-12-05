@@ -13,8 +13,8 @@ import key
 import zombie
 import random
 
-key_point_l=[(1050,2190),(200,2200),(400,1300),(1450,2400),(1080,-150),(120,860),(120,200),(120,2020)]
 def key_point_set():
+    key_point_l=[(1050,2190),(200,2200),(400,1300),(1450,2400),(1080,-150),(120,860),(120,200),(120,2020)]
     k1 = random.choice(key_point_l)
     server.key1 = key.Key(k1[0], k1[1])  # 튜플에서 x, y 값을 직접 사용
     key_point_l.remove(k1)  # 뽑은 페어는 제거
@@ -54,9 +54,12 @@ def init():
         for i in range(1, 4):  # key1, key2, key3에 접근하려는 의도라면 범위는 1부터 4
             game_world.add_object(getattr(server, f'key{i}'), 1)
 
-        #zom=zombie.Zombie(300,800,True)
-        #game_world.add_object(zom,2)
-        #zombie.set_phase1()
+        zom=zombie.Zombie(300,800,True)
+        game_world.add_object(zom,2)
+        zom = zombie.Zombie(500, -50, True)
+        game_world.add_object(zom, 2)
+        zom = zombie.Zombie(1200, 700, True)
+        game_world.add_object(zom, 2)
 
         server.b_g=Background()
         game_world.add_object(server.b_g,0)
@@ -80,14 +83,12 @@ def finish():
     server.player = None
     server.b_g = None
     server.walls = []
-    zombie.Zombie = []
     server.start_time = None
     server.key1 = None
     server.key2 = None
     server.key3 = None
     server.cover = None
     server.escape_open = None
-    server.mode = None
     pass
 
 def update():

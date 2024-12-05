@@ -36,6 +36,7 @@ class Key:
     def handle_collision(self, group, other):
         if self.key_draw:
             if group == 'player:key' and not self.check_key :
+                zombie.set_phase1()
                 for i in zombie.P1_zom:
                     i.yes_draw=True
 
@@ -48,6 +49,7 @@ class Key:
                 self.check_key=True
 
         pass
+
 
 class key_open_text:
     def __init__(self,num =1):

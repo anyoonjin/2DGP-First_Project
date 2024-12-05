@@ -7,18 +7,17 @@ import random
 
 from behavior_tree import BehaviorTree, Action, Sequence, Condition, Selector
 import server
-'''
-PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
-RUN_SPEED_KMPH = 9.0  # Km / Hour
+
+PIXEL_PER_METER = (10.0 / 0.5)  # 10 pixel 30 cm
+RUN_SPEED_KMPH = 15.0  # Km / Hour
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 # zombie Action Speed
-TIME_PER_ACTION = 0.5
+TIME_PER_ACTION = 1
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 10.0
-'''
 
 
 class Zombie:
@@ -50,7 +49,7 @@ class Zombie:
     def update(self,val=0.0):
         self.y+=val
         self.ty+=val
-        self.frame = (self.frame + 4 * server.ACTION_PER_TIME * game_framework.frame_time) % 4
+        self.frame = (self.frame + 4 * ACTION_PER_TIME * game_framework.frame_time) % 4
         self.bt.run()
         if self.x<130 :
             self.x+=10
@@ -75,7 +74,7 @@ class Zombie:
     def distance_less_than(self, x1, y1, x2, y2, r):
         if self.yes_draw:
             distance2 = (x1 - x2) ** 2 + (y1 - y2) ** 2
-            return distance2 < (server.PIXEL_PER_METER * r) ** 2
+            return distance2 < (PIXEL_PER_METER * r) ** 2
 
     def move_slightly_to(self, tx, ty):
         self.dir = math.atan2(ty - self.y, tx - self.x)
@@ -89,7 +88,7 @@ class Zombie:
                 self.face_dir = 1
             else:  # 오른쪽
                 self.face_dir = 0
-        distance = server.RUN_SPEED_PPS * game_framework.frame_time
+        distance = RUN_SPEED_PPS * game_framework.frame_time
         self.x += distance * math.cos(self.dir)
         self.y += distance * math.sin(self.dir)
 
@@ -136,7 +135,7 @@ class Zombie:
             return BehaviorTree.RUNNING
         pass
 
-    def build_behavior_tree(self,r=10):
+    def build_behavior_tree(self,r=13):
         a2 = Action('Move to', self.move_to)
         a3 = Action('Set random location', self.set_random_location)
         root = wander = Sequence('Wander', a3, a2)

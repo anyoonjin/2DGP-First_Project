@@ -42,7 +42,10 @@ def remove_object(o):
     for layer in world:
         if o in layer:
             layer.remove(o)
+            remove_collision_objects(o)
+            del o
             return
+    raise ValueError('Cannot delete non existing object')
 
 
 def clear():
@@ -66,22 +69,9 @@ def collide(a, b):
 def handle_collisions():
     #게임월드에 등록된 충돌정보를 바탕으로 실제 충돌검사를 수행
     for group, pairs in collision_pairs.items():
-        '''
-        print(f"Group: {group}")
-        print("Objects in Group A:")
-        for obj in pairs[0]:
-            print(f"  {obj}")
-
-        print("Objects in Group B:")
-        for obj in pairs[1]:
-            print(f"  {obj}")
-
-        '''
         for a in pairs[0]:  # A 리스트에서 하나씩 뽑고
             for b in pairs[1]:  # B 리스트에서 하나씩 뽑고, 두 개의 객체 가져오기
                 if collide(a, b):
-                    # 충돌 시 각 객체에 충돌 처리 메서드 호출
-                   # print(f"Collision detected between {a} and {b} in group {group}")
                     a.handle_collision(group, b)
                     b.handle_collision(group, a)
 
