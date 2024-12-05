@@ -16,6 +16,7 @@ class Key:
             Key.image=load_image('key.png')
         self.x,self.y=x,y
         self.check_key=False
+        self.key_draw=False
 
     def update(self, val: float = 0.0):
         # if (self.y1 > 20.0):
@@ -23,8 +24,9 @@ class Key:
         pass
 
     def draw(self):
-        self.image.clip_draw(0, 0,100, 100,self.x, self.y)
-        draw_rectangle(*self.get_bb())
+        if self.key_draw:
+            self.image.clip_draw(0, 0,100, 100,self.x, self.y)
+            draw_rectangle(*self.get_bb())
         pass
 
     def get_bb(self):
@@ -32,17 +34,18 @@ class Key:
         pass
 
     def handle_collision(self, group, other):
-        if group == 'player:key' and not self.check_key :
-            for i in zombie.P1_zom:
-                game_world.add_object(i,1)
+        if self.key_draw:
+            if group == 'player:key' and not self.check_key :
+                for i in zombie.P1_zom:
+                    game_world.add_object(i,1)
 
-            game_world.remove_object(self)
-            server.player.key_count += 1
-            server.start_time = get_time()
-            print(f'key=           {server.player.key_count}')
-            if server.player.key_count == 3:
-                pass
-            self.check_key=True
+                game_world.remove_object(self)
+                server.player.key_count += 1
+                server.start_time = get_time()
+                print(f'key=           {server.player.key_count}')
+                if server.player.key_count == 3:
+                    pass
+                self.check_key=True
 
         pass
 
@@ -74,10 +77,12 @@ class Escape:
     def __init__(self,x=1050,y=2000):
         self.image=load_image('escape.png')
         self.x, self.y = x, y
+        self.succes=False
 
     def draw(self):
-        self.image.clip_draw(0, 0, 150, 150, self.x, self.y, 200, 180)
-        draw_rectangle(*self.get_bb())
+        if self.succes:
+            self.image.clip_draw(0, 0, 150, 150, self.x, self.y, 200, 180)
+            draw_rectangle(*self.get_bb())
         pass
 
     def update(self, val: float = 0.0):
@@ -90,6 +95,7 @@ class Escape:
         pass
 
     def handle_collision(self, group, other):
-        if group == 'player:escape': #게임오버로 넘어감
-            print('탈출구 충돌체크')
-            pass
+        if self.succes:
+            if group == 'player:escape': #게임오버로 넘어감
+                print('탈출구 충돌체크')
+                pass

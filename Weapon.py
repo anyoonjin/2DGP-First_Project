@@ -14,7 +14,8 @@ class Arrow:
         game_world.add_collision_pair('arrow:zombie', self, None)
 
 
-    def update(self):
+    def update(self,val=0.0):
+        self.y+=val
         if self.dir == 0:
             self.y += 8 * 100 * game_framework.frame_time
         elif self.dir == 1:
@@ -23,7 +24,6 @@ class Arrow:
             self.x -= 8 * 100 * game_framework.frame_time
         elif self.dir == 3:
             self.y -= 8 * 100 * game_framework.frame_time
-
         if self.x < 10 or self.x > 1600 - 10:
             game_world.remove_object(self)
         pass

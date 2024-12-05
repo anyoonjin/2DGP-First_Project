@@ -33,11 +33,13 @@ def init():
     third_key = False
     server.start_time = get_time()
     if server.mode =='play':
-
         server.key1 = key.Key()
         server.key2 = key.Key(120, 2020)
         server.key3 = key.Key(500,2020)
         server.escape_open=key.Escape()
+        game_world.add_object(server.escape_open, 1)
+        for i in range(1, 4):  # key1, key2, key3에 접근하려는 의도라면 범위는 1부터 4
+            game_world.add_object(getattr(server, f'key{i}'), 1)
 
         zombie.set_phase1()
         zombie.Zombies+=zombie.P1_zom
@@ -83,25 +85,25 @@ def update():
     global first_key, second_key, third_key
 
     if not first_key and 5.0 <= get_time() - server.start_time <= 5.9:
-        game_world.add_object(server.key1, 1)
+        server.key1.key_draw=True
         game_world.add_collision_pair('player:key', server.player, None)
         game_world.add_collision_pair('player:key', None, server.key1)
         text_key = key.key_open_text()
-        game_world.add_object(text_key, 1)
+        game_world.add_object(text_key, 2)
         first_key = True
     elif not second_key and server.player.key_count==1 :
-        game_world.add_object(server.key2, 1)
+        server.key2.key_draw = True
         game_world.add_collision_pair('player:key', server.player, None)
         game_world.add_collision_pair('player:key', None, server.key2)
         text_key = key.key_open_text(2)
-        game_world.add_object(text_key, 1)
+        game_world.add_object(text_key, 2)
         second_key = True
     elif not third_key and server.player.key_count==2 :
-        game_world.add_object(server.key3, 1)
+        server.key3.key_draw = True
         game_world.add_collision_pair('player:key', server.player, None)
         game_world.add_collision_pair('player:key', None, server.key3)
         text_key = key.key_open_text(3)
-        game_world.add_object(text_key, 1)
+        game_world.add_object(text_key, 2)
         third_key = True
     elif server.player.key_count == 3:
         game_world.add_object(server.escape_open, 1)
@@ -109,7 +111,7 @@ def update():
         game_world.add_collision_pair('player:escape', None, server.escape_open)
         server.player.key_count = 4
         text_key = key.key_open_text(4)
-        game_world.add_object(text_key, 1)
+        game_world.add_object(text_key, 2)
 
     game_world.update()
     game_world.handle_collisions()

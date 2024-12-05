@@ -62,6 +62,12 @@ class Idle:
     def draw(player):
         player.image.clip_draw(int(player.frame )* 75,int(player.action)* 75, 75, 75, int(player.x),int( player.y),player.size,player.size)
 
+def game_word_total_y(val=0.63):
+    for obj in game_world.world[1]:
+        if obj is not server.player:
+            print(f'{obj}')
+            obj.update(val)
+
 # 상=0 / 우=1 / 좌=2 / 하=3
 class Run:
     @staticmethod
@@ -90,12 +96,16 @@ class Run:
         if player.dir==0:
             if bg_y1<=1400 and player.y>=500:
                 server.b_g.update(0.5)
+                '''
                 play_mode.update_Wall(-0.63)
                 for k in [server.key1, server.key2, server.key3,server.escape_open]:
                     if k is not None:
                         k.update(-0.63)
                 for zom in zombie.Zombies:
                     zom.update(-0.63)
+                '''
+                game_word_total_y(-0.63)
+
             elif player.y<=900 :
                 player.y += 1* RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==1:
@@ -107,12 +117,15 @@ class Run:
         elif player.dir==3:
             if  bg_y1>20 and player.y<=600 :    #밑으로 내려갈 배경이 남았을 때/ 남지않았으면 50
                 server.b_g.update(-0.5)
+                '''
                 play_mode.update_Wall(0.63)
                 for k in [server.key1, server.key2, server.key3,server.escape_open]:
                     if k is not None:
                         k.update(0.63)
                 for zom in zombie.Zombies:
                     zom.update(0.63)
+                '''
+                game_word_total_y(0.63)
                #play_mode.b_g.check()
             elif player.y>=80 :
                 player.y -= 1 * RUN_SPEED_PPS * game_framework.frame_time

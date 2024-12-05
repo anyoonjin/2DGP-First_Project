@@ -45,7 +45,7 @@ class Zombie:
         else:
             return self.x - 20, self.y - 50, self.x + 20, self.y + 50
 
-    def update(self,val=0):
+    def update(self,val=0.0):
         self.y+=val
         self.ty+=val
         self.frame = (self.frame + 4 * ACTION_PER_TIME * game_framework.frame_time) % 4
