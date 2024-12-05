@@ -23,7 +23,7 @@ FRAMES_PER_ACTION = 10.0
 class Zombie:
     image = None
 
-    def __init__(self, x=None, y=None):
+    def __init__(self, x=None, y=None ,yes=False):
         self.x = x if x else random.randint(100, 1180)
         self.y = y if y else random.randint(100, 924)
         self.image = load_image('zombie.png')
@@ -38,6 +38,7 @@ class Zombie:
         self.set_random_location()
         game_world.add_collision_pair('player:zombie',None,self)
         game_world.add_collision_pair('arrow:zombie', None, self)
+        self.yes_draw=yes
 
     def get_bb(self):
         if self.face_dir==3 or self.face_dir ==2:
@@ -56,23 +57,24 @@ class Zombie:
             self.x-=10
 
     def draw(self):
-        self.image.clip_draw(int(self.frame) * 100, int(self.face_dir) * 100, 100, 100, self.x, self.y, 150, 150)
-        draw_rectangle(*self.get_bb())
+        if self.yes_draw:
+            self.image.clip_draw(int(self.frame) * 100, int(self.face_dir) * 100, 100, 100, self.x, self.y, 150, 150)
+            draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):
         pass
 
     def handle_collision(self, group, other):
-        if group == 'arrow:zombie':
-            remove_zombie(self)
-            game_world.remove_object(self)
-        elif group == 'player:zombie':
-            #close_canvas()
-            pass
+        if self.yes_draw:
+            if group == 'arrow:zombie':
+                game_world.remove_object(self)
+            elif group == 'player:zombie':
+                pass
 
     def distance_less_than(self, x1, y1, x2, y2, r):
-        distance2 = (x1 - x2) ** 2 + (y1 - y2) ** 2
-        return distance2 < (PIXEL_PER_METER * r) ** 2
+        if self.yes_draw:
+            distance2 = (x1 - x2) ** 2 + (y1 - y2) ** 2
+            return distance2 < (PIXEL_PER_METER * r) ** 2
 
     def move_slightly_to(self, tx, ty):
         self.dir = math.atan2(ty - self.y, tx - self.x)
@@ -91,20 +93,22 @@ class Zombie:
         self.y += distance * math.sin(self.dir)
 
     def is_boy_nearby(self, r):
-        if self.distance_less_than(server.player.x, server.player.y, self.x, self.y, r):
-            self.build_behavior_tree(300)
-            print("소년 발견!")
-            return BehaviorTree.SUCCESS
-        else:
-            return BehaviorTree.FAIL
+        if self.yes_draw:
+            if self.distance_less_than(server.player.x, server.player.y, self.x, self.y, r):
+                self.build_behavior_tree(300)
+                print("소년 발견!")
+                return BehaviorTree.SUCCESS
+            else:
+                return BehaviorTree.FAIL
 
     def move_to_boy(self, r=0.5):
-        self.state = 'Walk'
-        self.move_slightly_to(server.player.x, server.player.y)
-        if self.distance_less_than(server.player.x, server.player.y, self.x, self.y, r):
-            return BehaviorTree.SUCCESS
-        else:
-            return BehaviorTree.RUNNING
+        if self.yes_draw:
+            self.state = 'Walk'
+            self.move_slightly_to(server.player.x, server.player.y)
+            if self.distance_less_than(server.player.x, server.player.y, self.x, self.y, r):
+                return BehaviorTree.SUCCESS
+            else:
+                return BehaviorTree.RUNNING
 
     def set_random_location(self):
         if self.wander_num == 0:  # 오른쪽
@@ -148,17 +152,9 @@ class Zombie:
         self.bt = BehaviorTree(root)
 
 
-Zombies=[]
 P1_zom=[]
-def make_zombie():
-    pass
 def set_phase1():
     for i in range(5):
         zom=Zombie(random.randint(1,3)*100+1200,random.randint(-5,10)*100+300)
+        game_world.add_object(zom,2)
         P1_zom.append(zom)
-
-    pass
-def remove_zombie(o):
-    if o in Zombies:
-        Zombies.remove(o)
-        return

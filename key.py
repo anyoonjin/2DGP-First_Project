@@ -37,7 +37,7 @@ class Key:
         if self.key_draw:
             if group == 'player:key' and not self.check_key :
                 for i in zombie.P1_zom:
-                    game_world.add_object(i,1)
+                    i.yes_draw=True
 
                 game_world.remove_object(self)
                 server.player.key_count += 1

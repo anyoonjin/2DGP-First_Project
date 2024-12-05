@@ -63,10 +63,11 @@ class Idle:
         player.image.clip_draw(int(player.frame )* 75,int(player.action)* 75, 75, 75, int(player.x),int( player.y),player.size,player.size)
 
 def game_word_total_y(val=0.63):
-    for obj in game_world.world[1]:
-        if obj is not server.player:
-            print(f'{obj}')
-            obj.update(val)
+    for i in range(1,3):
+        for obj in game_world.world[i]:
+            if obj is not server.player:
+                print(f'{obj}')
+                obj.update(val)
 
 # 상=0 / 우=1 / 좌=2 / 하=3
 class Run:
