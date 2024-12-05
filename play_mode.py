@@ -1,12 +1,10 @@
 from pico2d import *
-from pygame.examples.cursors import image
 
 import game_world
 import logo_mode
 import game_framework
 from player import Player
 from background import Background, Cover
-from Weapon import Arrow
 import server
 import object_wall
 import key
