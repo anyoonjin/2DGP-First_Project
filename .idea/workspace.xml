@@ -5,46 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd74022c-d4e1-4ef5-92b9-2767b7eacc9b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/2DGP-First_Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2DGP-First_Project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/Analysis-00.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/COLLECT-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/COLLECT-00.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/EXE-00.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/PKG-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/PKG-00.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/PYZ-00.pyz" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/PYZ-00.pyz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/PYZ-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/PYZ-00.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/base_library.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/base_library.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/main.exe" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/main.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/main.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/main.pkg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/warn-main.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/warn-main.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/xref-main.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/xref-main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/VCRUNTIME140.dll" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/VCRUNTIME140.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/VCRUNTIME140_1.dll" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/VCRUNTIME140_1.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/_asyncio.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/_asyncio.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/_bz2.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/_bz2.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/_ctypes.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/_ctypes.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/_decimal.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/_decimal.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/_hashlib.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/_hashlib.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/_lzma.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/_lzma.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/_multiprocessing.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/_multiprocessing.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/_overlapped.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/_overlapped.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/_queue.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/_queue.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/_socket.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/_socket.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/_ssl.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/_ssl.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/_uuid.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/_uuid.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/_wmi.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/_wmi.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/base_library.zip" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/base_library.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/libcrypto-3.dll" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/libcrypto-3.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/libssl-3.dll" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/libssl-3.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/pyexpat.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/pyexpat.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/python312.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/select.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/select.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/_internal/unicodedata.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/_internal/unicodedata.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main/main.exe" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main/main.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.spec" beforeDir="false" afterPath="$PROJECT_DIR$/main.spec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
