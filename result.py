@@ -15,7 +15,7 @@ def handle_events():
             if event.key == SDLK_ESCAPE:
                 game_framework.quit()
             elif event.key == SDLK_r:  # R 키 조건 추가
-                server.mode=='logo'
+                server.mode='logo'
                 # 원하는 동작 추가
 
 def init():

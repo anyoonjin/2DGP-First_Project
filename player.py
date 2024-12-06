@@ -165,7 +165,7 @@ class Player:
         pass
 
     def get_bb(self):
-        return self.x-30,self.y-50,self.x+10,self.y
+        return self.x-30,self.y-40,self.x+10,self.y
         pass
 
     def attack(self):
