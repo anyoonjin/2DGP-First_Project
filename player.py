@@ -37,7 +37,7 @@ class Idle:
             player.face_dir = 1
         elif down_down(e) or up_up(e) or right_up(e) or left_up(e):  # 아래로 RUN
             player.face_dir, player.action = 3, 3
-        elif up_down(e) or down_down(e) or right_up(e) or left_up(e):  # 위로 RUN
+        elif up_down(e) or down_up(e) or right_up(e) or left_up(e):  # 위로 RUN
             player.face_dir, player.action = 0, 0
 
 
@@ -77,7 +77,7 @@ class Run:
             player.dir, player.face_dir, player.action = 2, 2, 2
         elif down_down(e) or up_up(e) or right_up(e) or left_up(e):    #아래로 RUN
             player.dir, player.face_dir, player.action = 3, 3, 3
-        elif up_down(e) or down_down(e) or right_up(e) or left_up(e):    #위로 RUN
+        elif up_down(e) or down_up(e) or right_up(e) or left_up(e):    #위로 RUN
             player.dir, player.face_dir, player.action = 0, 0, 0
 
     @staticmethod
