@@ -61,7 +61,9 @@ def init():
         game_world.add_object(zom,2)
         zom = zombie.Zombie(500, -50, True)
         game_world.add_object(zom, 2)
-        zom = zombie.Zombie(1200, 700, True)
+        zom = zombie.Zombie(1200, 1100, True)
+        game_world.add_object(zom, 2)
+        zom = zombie.Zombie(200, 2300, True)
         game_world.add_object(zom, 2)
 
         server.b_g=Background()
@@ -111,6 +113,8 @@ def update():
         text_key = key.key_open_text(2)
         game_world.add_object(text_key, 3)
         second_key = True
+
+        #zombie.set_phase2()
     elif not third_key and server.player.key_count==2 :
         server.key3.key_draw = True
         game_world.add_collision_pair('player:key', server.player, None)

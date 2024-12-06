@@ -9,7 +9,7 @@ from behavior_tree import BehaviorTree, Action, Sequence, Condition, Selector
 import server
 
 PIXEL_PER_METER = (10.0 / 0.5)  # 10 pixel 30 cm
-RUN_SPEED_KMPH = 15.0  # Km / Hour
+RUN_SPEED_KMPH = 25.0  # Km / Hour
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -45,9 +45,9 @@ class Zombie:
 
     def get_bb(self):
         if self.face_dir==3 or self.face_dir ==2:
-            return self.x - 48, self.y - 50, self.x + 48, self.y + 50
+            return self.x - 48, self.y - 30, self.x + 48, self.y + 30
         else:
-            return self.x - 20, self.y - 50, self.x + 20, self.y + 50
+            return self.x - 20, self.y - 30, self.x + 20, self.y + 30
 
     def update(self,val=0.0):
         self.y+=val
@@ -116,16 +116,16 @@ class Zombie:
 
     def set_random_location(self):
         if self.wander_num == 0:  # 오른쪽
-            self.tx = self.x + 100
+            self.tx = self.x + 200
             self.wander_num=1
         elif self.wander_num == 1:  # 왼쪽
-            self.tx = self.x - 100
+            self.tx = self.x - 200
             self.wander_num = 0
         elif self.wander_num == 2:  # 위쪽
-            self.ty = self.y + 100
+            self.ty = self.y + 200
             self.wander_num = 3
         elif self.wander_num == 3:  # 아래쪽
-            self.ty = self.y - 100
+            self.ty = self.y - 200
             self.wander_num=2
         return BehaviorTree.SUCCESS
 
@@ -158,6 +158,10 @@ class Zombie:
 
 P1_zom=[]
 def set_phase1():
+    global bgm
+    bgm = load_wav('siren.wav')
+    bgm.set_volume(50)
+    bgm.play(2)
     for i in range(5):
         zom=Zombie(random.randint(1,3)*100+1200,random.randint(-5,10)*100+300)
         game_world.add_object(zom,2)
