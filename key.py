@@ -1,6 +1,4 @@
 from pico2d import *
-from pygame.examples.cursors import image
-from pygame.gfxdraw import rectangle
 
 import game_world
 import game_framework

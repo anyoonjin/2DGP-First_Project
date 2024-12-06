@@ -1,5 +1,4 @@
 from pico2d import *
-from pygame import get_error
 
 import game_framework as game_framework
 import game_world
