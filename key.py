@@ -60,7 +60,9 @@ class key_open_text:
         else:
             key_open_text.image = load_image(f'key_open{num}.png')
         self.count=0
-
+        self.sound =load_wav('text_sound.wav')
+        self.sound.set_volume(100)
+        self.sound.play(1)
     def update(self):
         self.count+=1
         if self.count==1700:
@@ -82,6 +84,9 @@ class Escape:
         self.image=load_image('escape.png')
         self.x, self.y = x, y
         self.succes=False
+        self.sound = load_wav('text_sound.wav')
+        self.sound.set_volume(100)
+        self.sound.play(1)
 
     def draw(self):
         if self.succes:
