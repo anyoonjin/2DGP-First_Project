@@ -42,12 +42,13 @@ class Zombie:
 
         self.sound=load_wav('hit.wav')
         self.sound.set_volume(50)
+        self.bb_draw = server.player.bb_draw
 
     def get_bb(self):
         if self.face_dir==3 or self.face_dir ==2:
-            return self.x - 48, self.y - 30, self.x + 48, self.y + 30
+            return self.x - 40, self.y - 30, self.x + 40, self.y + 30
         else:
-            return self.x - 20, self.y - 30, self.x + 20, self.y + 30
+            return self.x - 18, self.y - 30, self.x + 18, self.y + 30
 
     def update(self,val=0.0):
         self.y+=val
@@ -62,7 +63,8 @@ class Zombie:
     def draw(self):
         if self.yes_draw:
             self.image.clip_draw(int(self.frame) * 100, int(self.face_dir) * 100, 100, 100, self.x, self.y, 150, 150)
-            draw_rectangle(*self.get_bb())
+            if  self.bb_draw:
+                draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):
         pass

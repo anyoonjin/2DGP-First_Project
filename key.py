@@ -19,6 +19,7 @@ class Key:
         self.key_draw=False
         self.sound=load_wav('key_sound.wav')
         self.sound.set_volume(50)
+        self.bb_draw = server.player.bb_draw
 
     def update(self, val: float = 0.0):
         # if (self.y1 > 20.0):
@@ -28,7 +29,8 @@ class Key:
     def draw(self):
         if self.key_draw:
             self.image.clip_draw(0, 0,100, 100,self.x, self.y)
-            draw_rectangle(*self.get_bb())
+            if self.bb_draw:
+                draw_rectangle(*self.get_bb())
         pass
 
     def get_bb(self):
@@ -87,11 +89,13 @@ class Escape:
         self.sound = load_wav('text_sound.wav')
         self.sound.set_volume(100)
         self.sound.play(1)
+        self.bb_draw = server.player.bb_draw
 
     def draw(self):
         if self.succes:
             self.image.clip_draw(0, 0, 150, 150, self.x, self.y, 200, 180)
-            draw_rectangle(*self.get_bb())
+            if self.bb_draw:
+                draw_rectangle(*self.get_bb())
         pass
 
     def update(self, val: float = 0.0):

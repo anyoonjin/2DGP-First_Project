@@ -5,6 +5,7 @@ import server
 class Wall:
     def __init__(self,x1=100,y1=100.0,x2=200,y2=200.0):
         self.x1,self.x2,self.y1,self.y2=x1,x2,y1,y2
+        self.bb_draw = server.player.bb_draw
         pass
 
     def update(self, val: float = 0.0):
@@ -14,7 +15,8 @@ class Wall:
         pass
 
     def draw(self):
-        draw_rectangle(*self.get_bb())
+        if  self.bb_draw:
+            draw_rectangle(*self.get_bb())
         pass
 
     def get_bb(self):

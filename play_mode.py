@@ -31,6 +31,12 @@ def key_point_set():
     key_point_l.remove(e1)
     pass
 
+def bb_draw():
+    for i in range(1,3):
+        for obj in game_world.world[i]:
+            obj.bb_draw = not obj.bb_draw
+
+
 def handle_events():
     events=get_events()
     for event in events:
@@ -38,6 +44,8 @@ def handle_events():
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.quit()
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_a:
+            bb_draw()
         else:
             server.player.handle_event(event)
 
@@ -52,25 +60,25 @@ def init():
     third_key = False
     server.start_time = get_time()
     if server.mode =='play':
+        server.player = Player()
+        game_world.add_object(server.player, 1)
+
         key_point_set()
         game_world.add_object(server.escape_open, 1)
         for i in range(1, 4):  # key1, key2, key3에 접근하려는 의도라면 범위는 1부터 4
             game_world.add_object(getattr(server, f'key{i}'), 1)
 
-        zom=zombie.Zombie(300,800,True)
+        zom=zombie.Zombie(400,800,True)
         game_world.add_object(zom,2)
         zom = zombie.Zombie(500, -50, True)
         game_world.add_object(zom, 2)
-        zom = zombie.Zombie(1200, 1100, True)
+        zom = zombie.Zombie(1400, 1100, True)
         game_world.add_object(zom, 2)
-        zom = zombie.Zombie(200, 2300, True)
+        zom = zombie.Zombie(400, 2000, True)
         game_world.add_object(zom, 2)
 
         server.b_g=Background()
         game_world.add_object(server.b_g,0)
-
-        server.player=Player()
-        game_world.add_object(server.player,1)
 
         object_wall.wall_make()
         game_world.add_collision_pair('player:wall',server.player,None)
@@ -133,7 +141,7 @@ def update():
     game_world.update()
     game_world.handle_collisions()
     if server.player.success or server.mode=='fail':
-        delay(3)
+        delay(2)
         finish()
         game_framework.change_mode(result)
 

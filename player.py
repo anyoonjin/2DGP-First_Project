@@ -98,7 +98,7 @@ class Run:
                 game_word_total_y(-0.63)
 
             elif player.y<=900 :
-                player.y += 4* RUN_SPEED_PPS * game_framework.frame_time
+                player.y += 7* RUN_SPEED_PPS * game_framework.frame_time
         elif player.dir==1:
             if player.x <=1520:
                 player.x += 5 * RUN_SPEED_PPS * game_framework.frame_time
@@ -111,7 +111,7 @@ class Run:
                 game_word_total_y(0.63)
                #play_mode.b_g.check()
             elif player.y>=80 :
-                player.y -= 4 * RUN_SPEED_PPS * game_framework.frame_time
+                player.y -= 7 * RUN_SPEED_PPS * game_framework.frame_time
 
                 #print(f'~~~~~~~~~~ BG Y:{player.b_g.y1}')
         print(f"x={player.x}  y={player.y}")
@@ -144,7 +144,7 @@ class Player:
                 Run: {right_down: Idle, left_down: Idle,up_down:Idle, down_down:Idle, left_up: Idle, right_up: Idle ,up_up:Idle ,down_up:Idle ,space_down:Run }
             }
         )
-
+        self.bb_draw=True
         self.sound=load_wav('skill.wav')
         self.sound.get_volume()
 
@@ -161,7 +161,8 @@ class Player:
 
     def draw(self):
         self.state_machine.draw()
-        draw_rectangle(*self.get_bb())
+        if  self.bb_draw:
+            draw_rectangle(*self.get_bb())
         pass
 
     def get_bb(self):
@@ -169,7 +170,7 @@ class Player:
         pass
 
     def attack(self):
-        arrow= Arrow(self.x,self.y,self.dir)
+        arrow= Arrow(self.x,self.y,self.dir,self.bb_draw)
         game_world.add_object(arrow,1)
         self.sound.play(1)
 
@@ -186,13 +187,13 @@ class Player:
         elif group =='player:wall':
             print('----------------------------player:wall')
             if self.dir == 0:
-                self.y -= 4 * RUN_SPEED_PPS * game_framework.frame_time
+                self.y -= 7 * RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 1:
                 self.x -= 5 * RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 2:
                 self.x += 5 * RUN_SPEED_PPS * game_framework.frame_time
             elif self.dir == 3:
-                self.y += 4 * RUN_SPEED_PPS * game_framework.frame_time
+                self.y += 7 * RUN_SPEED_PPS * game_framework.frame_time
 
         elif group =='player:escape':
             self.success=True

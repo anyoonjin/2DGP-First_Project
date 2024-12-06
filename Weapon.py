@@ -5,14 +5,14 @@ import game_framework
 class Arrow:
     image=None
     # 상=0 / 우=1 / 좌=2 / 하=3
-    def __init__(self,x=400,y=300 ,dir=0):
+    def __init__(self,x=400,y=300 ,dir=0, bb_d=False):
         if Arrow.image==None:
             Arrow.image=load_image('arrow.png')
             #print("Arrow.image is not loaded properly.")
         self.x,self.y,self.dir=x,y,dir
         game_world.add_collision_pair('arrow:job_desk', None, self)
         game_world.add_collision_pair('arrow:zombie', self, None)
-
+        self.bb_draw = bb_d
 
     def update(self,val=0.0):
         self.y+=val
@@ -38,7 +38,8 @@ class Arrow:
             self.image.clip_composite_draw(0, 0, 200, 200, 0, 'h', self.x, self.y, 100, 100)
         elif self.dir ==3:
             self.image.clip_composite_draw(0, 0, 200, 200, 1.6, 'h', self.x-10, self.y, 100, 100)
-        draw_rectangle(*self.get_bb())
+        if self.bb_draw :
+           draw_rectangle(*self.get_bb())
         pass
 
     def get_bb(self):

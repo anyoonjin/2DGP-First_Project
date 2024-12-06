@@ -9,7 +9,11 @@ import server
 import text
 import logo_mode
 
-
+def bb_draw():
+    for i in range(1,3):
+        for obj in game_world.world[i]:
+            if obj is not server.player:
+                obj.bb_draw = not obj.bb_draw
 
 def handle_events():
     events = get_events()
@@ -18,6 +22,8 @@ def handle_events():
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.quit()
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_a:
+            bb_draw()
         else:
             server.boy.handle_event(event)
 
@@ -62,7 +68,7 @@ def init():
     game_world.add_collision_pair('player:job_desk', None, boy)
 
     ch_text=text.Text()
-    game_world.add_object(ch_text,2)
+    game_world.add_object(ch_text,3)
 
 
 def finish():
@@ -77,7 +83,7 @@ def update():
     global logo_start_time,countdown,text_num
     if get_time() - logo_start_time >= 5.0 and not desk.choice:
         ch_text = text.Text()
-        game_world.add_object(ch_text, 2)
+        game_world.add_object(ch_text, 3)
         logo_start_time=get_time()
     elif server.mode=='play':
         finish()

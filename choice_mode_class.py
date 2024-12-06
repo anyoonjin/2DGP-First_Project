@@ -132,6 +132,7 @@ class Player:
 
         self.sound=load_wav('skill.wav')
         self.sound.set_volume(128)
+        self.bb_draw=True
         pass
 
     def update(self):
@@ -145,7 +146,8 @@ class Player:
 
     def draw(self):
         self.state_machine.draw()
-        draw_rectangle(*self.get_bb())
+        if self.bb_draw:
+            draw_rectangle(*self.get_bb())
         pass
 
     def get_bb(self):
@@ -153,7 +155,7 @@ class Player:
         pass
 
     def attack(self):
-        arrow= Arrow(self.x,self.y,self.dir)
+        arrow= Arrow(self.x,self.y,self.dir,self.bb_draw)
         game_world.add_object(arrow,1)
         self.sound.play(1)
         pass
@@ -185,6 +187,7 @@ class job_desk:
     def __init__(self, x1=100, y1=100.0, x2=200, y2=200.0):
         self.x1, self.x2, self.y1, self.y2 = x1, x2, y1, y2
         self.choice=False
+        self.bb_draw = True
         pass
 
     def update(self, val: float = 0.0):
@@ -193,7 +196,8 @@ class job_desk:
         pass
 
     def draw(self):
-        draw_rectangle(*self.get_bb())
+        if self.bb_draw :
+            draw_rectangle(*self.get_bb())
         pass
 
     def get_bb(self):
@@ -207,10 +211,10 @@ class job_desk:
         if group == 'arrow:job_desk' and not self.choice:
             self.choice = True
             job= job_chice()
-            game_world.add_object(job,2)
+            game_world.add_object(job,3)
             occupation_select_mode.countdown = get_time()
             t = text(3)
-            game_world.add_object(t, 2)
+            game_world.add_object(t, 3)
             pass
         pass
 
@@ -249,7 +253,7 @@ class text:
             game_world.remove_object(self)
             if self.num >= 1:
                 t = text(self.num)
-                game_world.add_object(t, 2)
+                game_world.add_object(t, 3)
             elif self.num ==0:
                 server.mode='play'
         pass
@@ -268,6 +272,7 @@ class text:
 class Wall:
     def __init__(self, x1=100, y1=100.0, x2=200, y2=200.0):
         self.x1, self.x2, self.y1, self.y2 = x1, x2, y1, y2
+        self.bb_draw = True
         pass
     def update(self, val: float = 0.0):
         # if (self.y1 > 20.0):
@@ -275,7 +280,8 @@ class Wall:
         self.y2 += val
         pass
     def draw(self):
-        draw_rectangle(*self.get_bb())
+        if self.bb_draw:
+            draw_rectangle(*self.get_bb())
         pass
     def get_bb(self):
         return self.x1, self.y2, self.x2, self.y1
